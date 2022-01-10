@@ -1,0 +1,97 @@
+
+## MANOVA
+
+An example from Field (2018 pp. 738-739):
+
+"Most psychopathologies have both behavioural and cognitive elements to them. For example, for someone with OCD who has an obsession with germs and contamination, the disorder might manifest itself in the number of times they both wash their hands (behavior) and *think about* washing their hands (cognition). To gauge the success of therapy, it is not enough to look only at behavioural outcomes (such as whether obsessive behaviours are reduced); we need to look at whether cognitions are changed too. Hence, the clinical psychologist measured two outcomes: the occurrence of obsession-related behaviours (Actions) and the occurrence of obsession-related cognitions (Thoughts) on a single day."
+
+```{r echo=F}
+MANOVA.data <- read.csv("Datasets/MANOVA.csv", sep=";")
+colnames(MANOVA.data) <- c("Group", "Actions", "Thoughts")
+knitr::kable(head(MANOVA.data, 20), caption = "Data for MANOVA", booktabs = T)
+```
+### Results Overview
+
+```{r echo=F}
+ResultsMANOVA <- matrix(c(2.5567, 2.557, 2.56, 2.557, 2.5567,
+                          2.7706, 2.771, 2.77, 2.77, 2.7706,
+                          2.1541, 2.154, 2.15, 2.15, 2.1541), ncol=5, byrow = T)
+colnames(ResultsMANOVA) <- c('JASP', 'SPSS', 'SAS', 'Minitab', 'R')
+rownames(ResultsMANOVA) <- c('F (Multivariate Pillai)', 'F (Univariate Actions)', 'F (Univariate Thoughts)')
+knitr::kable(head(ResultsMANOVA, 20), caption = "Result Overview MANOVA", booktabs = T)
+```
+
+
+### JASP
+
+```{r manovaJASP, echo=FALSE, fig.cap="\\label{fig:manovaJASP}JASP Output for MANOVA"}
+knitr::include_graphics('Screenshots/MANOVA/MANOVAjasp.PNG')
+```
+
+### SPSS
+
+```{r eval=F}
+DATASET ACTIVATE DataSet2.
+GLM Actions Thoughts BY Group
+  /METHOD=SSTYPE(3)
+  /INTERCEPT=INCLUDE
+  /CRITERIA=ALPHA(.05)
+  /DESIGN= Group.
+
+```
+
+```{r manovaSPSS, echo=FALSE, fig.cap="\\label{fig:manovaSPSS}SPSS Output for MANOVA"}
+knitr::include_graphics('Screenshots/MANOVA/MANOVAspss.PNG')
+```
+
+```{r manovaSPSS2, echo=FALSE, fig.cap="\\label{fig:manovaSPSS2}SPSS Output for MANOVA"}
+knitr::include_graphics('Screenshots/MANOVA/ANOVASspss.PNG')
+```
+### SAS
+
+```{r eval=F}
+proc glm data= work.MANOVA plots=none;
+  class Group;
+  model Actions Thoughts = group / ss3;
+  manova h=Group;
+run;
+```
+
+```{r manovaSAS, echo=FALSE, fig.cap="\\label{fig:manovaSAS}SAS Output for MANOVA"}
+knitr::include_graphics('Screenshots/MANOVA/MANOVAsas.PNG')
+```
+
+```{r manovaSAS2, echo=FALSE, fig.cap="\\label{fig:manovaSAS2}SAS Output for MANOVA"}
+knitr::include_graphics('Screenshots/MANOVA/ANOVASsas.PNG')
+```
+
+### Minitab
+
+```{r manovaMinitab, echo=FALSE, fig.cap="\\label{fig:manovaMinitab}Minitab Output for MANOVA"}
+knitr::include_graphics('Screenshots/MANOVA/MANOVAminitab.PNG')
+```
+
+```{r manovaMinitab2, echo=FALSE, fig.cap="\\label{fig:manovaMinitab2}Minitab Output for MANOVA"}
+knitr::include_graphics('Screenshots/MANOVA/ANOVASminitab.PNG')
+```
+
+### R
+
+```{r echo=F}
+MANOVA.data <- read.csv("Datasets/MANOVA.csv", sep=";")
+colnames(MANOVA.data) <- c("Group", "Actions", "Thoughts")
+```
+
+```{r}
+DVmanova <- cbind(MANOVA.data$Thoughts, MANOVA.data$Actions)
+fit <- manova(DVmanova ~ as.factor(Group), data = MANOVA.data)
+summary(fit, test ="Pillai")
+summary(fit, test ="Wilks")
+summary(fit, test ="Hotelling-Lawley")
+summary(fit, test ="Roy")
+summary.aov(fit)
+```
+### Remarks
+
+All differences in results between the software are due to rounding.
+

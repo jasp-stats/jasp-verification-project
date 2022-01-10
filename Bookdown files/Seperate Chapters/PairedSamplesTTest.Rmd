@@ -1,0 +1,84 @@
+
+## Paired Samples T-Test
+
+An example from Hays (1974, pp. 424-427):
+
+"Consider once again the question of scores on a test of dominance. The basic question has to do with the mean score for men as opposed to the mean score for women. In carrying out the experiment, the investigator decided to sample eight husband-wife-pairs at random. The members of each pair were given the test of dominance separately, and the data turned out as follows:"
+
+```{r echo=F}
+pstt.data <- data.frame(Husband=c(26,28,28,29,30,31,34,37), Wife=c(30,29,28,27,26,25,24,23))
+knitr::kable(head(pstt.data, 20), caption = "Data for Paired Sample T-Test", booktabs = T)
+```
+
+
+### Results Overview
+
+```{r echo=F}
+ResultsPSTT <- matrix(c(1.838, 1.8381, 1.838, 1.84, 1.84, 1.8381), ncol=6)
+colnames(ResultsPSTT) <- c('By Hand', 'JASP', 'SPSS', 'SAS', 'Minitab', 'R')
+rownames(ResultsPSTT) <- c('t')
+knitr::kable(head(ResultsPSTT, 20), caption = "Result Overview Paired Samples T-Test", booktabs = T)
+```
+
+
+### By Hand
+
+Calculations by hand can be found in Hays, 1974, pp. 424-427.
+
+Result: t = 1.838
+
+Not significant (two-tailed test) for $\alpha$ = .05 or less
+
+### JASP
+
+```{r psttJASP, echo=FALSE, fig.cap="\\label{fig:psttJASP}JASP Output for Paired Samples T-Test"}
+knitr::include_graphics('Screenshots/Paired Samples T test/psttJASP.PNG')
+```
+### SPSS
+
+```{r eval=F}
+DATASET ACTIVATE DataSet1.
+T-TEST PAIRS=Husband WITH Wife (PAIRED)
+  /CRITERIA=CI(.9500)
+  /MISSING=ANALYSIS.
+
+```
+
+```{r psttSPSS, echo=FALSE, fig.cap="\\label{fig:psttSPSS}SPSS Output for Paired Samples T-Test"}
+knitr::include_graphics('Screenshots/Paired Samples T test/psttSPSS.PNG')
+```
+
+### SAS
+
+```{r eval=F}
+proc ttest data=pstt sides=2 alpha=0.05 h0=0;
+title "Paired sample t-test";
+paired Husband * Wife;
+run;
+```
+
+```{r psttSAS, echo=FALSE, fig.cap="\\label{fig:psttSAS}SAS Output for Paired Samples T-Test"}
+knitr::include_graphics('Screenshots/Paired Samples T test/psttSAS.PNG')
+```
+
+
+### Minitab
+
+```{r psttMinitab, echo=FALSE, fig.cap="\\label{fig:psttMinitab}Minitab Output for Paired Samples T-Test"}
+knitr::include_graphics('Screenshots/Paired Samples T test/psttMinitab.PNG')
+```
+
+### R
+
+```{r echo = F}
+pstt.data <- read.csv("Datasets/PairedSamplettest.csv", sep=";")
+```
+
+```{r}
+t.test(pstt.data$Husband, pstt.data$Wife, paired = T)
+```
+
+
+### Remarks
+
+All differences in results between the software and hand calculation are due to rounding.

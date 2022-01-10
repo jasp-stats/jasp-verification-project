@@ -1,0 +1,91 @@
+
+## One-Way Repeated-Measures ANOVA
+
+An example from Kerlinger (1969, pp. 242-248):
+
+"A principal of a school and the members of his staff decided to introduce a program of education in intergroup relations as an addition to the school's curriculum. One of the problems that arose was in the use of motion pictures. Films were shown in the initial phases of the program, but the results were not too encouraging. [...} They decided to test the hypothesis that seeing the films and then discussing them would improve the viewers' attitudes toward minority group members more than would just seeing the films. For a preliminary study the staff randomly selected a group of students from the total student body and attempted to pair the students on intelligence and socioeconomic background until ten pairs were obtained [...] Each member of each pair was randomly assigned to either an experimental or a control group, and then both groups were shown a new film on intergroup relations. The A1 (experimental) group had a discission session after the picture was shown; the A2 (control) group had no such discussion afrer the film. Both groups were tested with a scale designed to measures attitudes toward minority groups."
+
+```{r echo = F}
+Ranova.data <- data.frame("A1(experimental)" = c(8,9,5,4,2,10,3,12,6,11), "A2(control)"=c(6,8,3,2,1,7,1,7,6,9))
+knitr::kable(head(Ranova.data, 91), caption = "Data for One-Way Repeated-Measures ANOVA", booktabs = T)
+```
+
+
+### Results Overview
+
+```{r echo=F}
+ResultsRANOVA <- matrix(c(22.47, 22.50, 22.50, 22.50, 22.50, 22.50), ncol=6)
+colnames(ResultsRANOVA) <- c('By Hand', 'JASP', 'SPSS', 'SAS', 'Minitab', 'R')
+rownames(ResultsRANOVA) <- c('F')
+knitr::kable(head(ResultsRANOVA, 20), caption = "Result Overview One-Way Repeated-Measures ANOVA", booktabs = T)
+```
+
+### By Hand
+
+Calculations by hand can be found in Kerlinger, 1969, pp. 242-248.
+
+Results: 
+
+```{r echo = F}
+Ranova.results.kerlinger <- data.frame(Source = c("Within groups", "Between groups", "Residual", "Totals"), df = c(1,9,9,19), SS = c(20,182,8,210), MS = c(20.00,20.22,0.89,NA), F = c(22.47, 22.72, NA, NA))
+knitr::kable(head(Ranova.results.kerlinger, 20), caption = "Result from Kerlinger (1969)", booktabs = T)
+```
+
+**Conclusion:** All F-values are significant for $\alpha$ = .001 or less.
+
+
+### JASP
+
+```{r ranovaJASP, echo=FALSE, fig.cap="\\label{fig:ranovaJASP}JASP Output for One-Way Repeated-Measures ANOVA"}
+knitr::include_graphics('Screenshots/Repeated Measures ANOVA/ranovaJASP.PNG')
+```
+
+### SPSS
+
+```{r eval=F}
+DATASET ACTIVATE DataSet2.
+GLM A1.experimental A2.control
+  /WSFACTOR=Condition 2 Polynomial 
+  /METHOD=SSTYPE(3)
+  /CRITERIA=ALPHA(.05)
+  /WSDESIGN=Condition.
+```
+
+```{r ranovaSPSS, echo=FALSE, fig.cap="\\label{fig:ranovaSPSS}SPSS Output for One-Way Repeated-Measures ANOVA"}
+knitr::include_graphics('Screenshots/Repeated Measures ANOVA/ranovaSPSS.PNG')
+```
+
+### SAS
+
+```{r eval=F}
+PROC GLM DATA=work.ranova;
+  CLASS Subject Condition;
+  MODEL Score = Subject Condition;
+RUN; 
+```
+
+```{r ranovaSAS, echo=FALSE, fig.cap="\\label{fig:ranovaSAS}SAS Output for One-Way Repeated-Measures ANOVA"}
+knitr::include_graphics('Screenshots/Repeated Measures ANOVA/ranovaSAS.PNG')
+```
+
+### Minitab
+
+```{r ranovaMinitab, echo=FALSE, fig.cap="\\label{fig:ranovaMinitab}Minitab Output for One-Way Repeated-Measures ANOVA"}
+knitr::include_graphics('Screenshots/Repeated Measures ANOVA/ranovaMinitab.PNG')
+```
+
+### R
+
+```{r echo=F}
+ranova.data2 <- read.csv("Datasets/ranova2.csv", sep=";")
+```
+
+```{r}
+summary(aov(Score ~ as.factor(ranova.data2$Condition) + Error(as.factor(ranova.data2$Subject)/as.factor(ranova.data2$Condition)), data=ranova.data2))
+```
+
+
+### Remarks
+
+
+All differences in results between the software and hand calculation are due to rounding.

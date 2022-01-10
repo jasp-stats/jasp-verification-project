@@ -1,0 +1,108 @@
+
+##  Factorial Independent ANOVA
+
+An example from Hays (1974, pp. 491-493, 508-512):
+
+"Just as before, the experimental game is under the control of the experimenter, so that each subject actually obtains the same score. After a fixed number of trials, during which the subject gets the preassigned score, he is asked to predict what his score will be on the next group of trials. Before he predicts, the subject is given 'information' about how this score compares with some norm group. In one experimental condition he is told that his performance is above average for the norm group, in the second condition he is told that his score is average, and in the third condition he is told that his score is below average for the norm group. Once again, there are three experimental treatments in terms of 'standings': 'above average', 'average', 'below average'. [...]One half of the subjects are told that they are being compared with college men, and the other half are told that they are being compared with professional athletes. Hence, there are two additional experimental treatments: 'college norms', and 'professional athlete norms'.
+
+We wish to examine three null hypotheses:
+
+(1) there is no effect of the standing given the subject[...]
+
+(2) the actual norm group given the subjects has no effect [...]
+
+(3) the norm-group-standing combination has no unique effect [...]
+
+The $\alpha$ level chosen for each of these three tests will be .05."
+
+
+
+
+```{r echo = F}
+FIanova.data <- data.frame(Norms = c(rep('College men', 10), rep('Professional Athlete', 10)), Above = c(52, 48, 43, 50, 43, 44, 46, 46, 43, 49, 38, 42, 42, 35, 33, 38, 39, 34, 33, 34), Average = c(28, 35, 34, 32, 34, 27, 31, 27, 29, 25, 43, 34, 33, 42, 41, 37, 37, 40, 36, 35), Below= c(15, 14, 23, 21, 14, 20, 21, 16, 20, 14, 23, 25, 18, 26, 18, 26, 20, 19, 22, 17))
+knitr::kable(head(FIanova.data, 91), caption = "Data for Factorial Independent ANOVA", booktabs = T)
+```
+
+N = 60
+
+### Results Overview
+
+```{r echo=F}
+ResultsFIANOVA <- matrix(c(0.35, 0.3582, 0.358, 0.36, 0.36, 0.358,
+                           209.8, 209.6418, 209.642, 209.64, 209.64, 209.642,
+                           34.0, 34.0075, 34.007, 34.01, 34.01, 34.007), ncol=6, byrow = T)
+colnames(ResultsFIANOVA) <- c('By Hand', 'JASP', 'SPSS', 'SAS', 'Minitab', 'R')
+rownames(ResultsFIANOVA) <- c('F (Norm groups)', 'F (Standings)', 'F (Interaction)')
+knitr::kable(head(ResultsFIANOVA, 18), caption = "Result Overview Independent Factorial ANOVA", booktabs = T)
+```
+
+### By Hand
+
+Calculations by hand can be found in Hays, 1974, pp. 508-512.
+
+Results: 
+
+```{r echo = F}
+FIanova.results.hays <- data.frame(Source = c("Rows (norm groups)", "Columns (standings)", "Interaction", "Error (within cells)"), SS = c(4.2, 4994.1, 810.2, 643.2), df = c(1,2,2,54), MS = c(4.2, 2497.05, 405.1, 11.9), F = c(.35, 209.8, 34.0, NA))
+knitr::kable(head(FIanova.results.hays, 20), caption = "Result from Hays (1974)", booktabs = T)
+```
+
+**Conclusion:** The null hypothesis cannot be rejected, for the main effect of norm groups. It can be rejected for the main effect of standings and the interaction effect.
+
+
+### JASP
+
+```{r FIanovaJASP, echo=FALSE, fig.cap="\\label{fig:FIanovaJASP}JASP Output for Independent Factorial ANOVA"}
+knitr::include_graphics('Screenshots/Factorial Independent ANOVA/FIanovaJASP.PNG')
+```
+
+### SPSS
+
+```{r eval=F}
+DATASET ACTIVATE DataSet1.
+UNIANOVA Score BY Norms Standing
+  /METHOD=SSTYPE(3)
+  /INTERCEPT=EXCLUDE
+  /CRITERIA=ALPHA(0.05)
+  /DESIGN=Norms Standing Norms*Standing.
+
+```
+
+```{r FIanovaSPSS, echo=FALSE, fig.cap="\\label{fig:FIanovaSPSS}SPSS Output for Independent Factorial ANOVA"}
+knitr::include_graphics('Screenshots/Factorial Independent ANOVA/FIanovaSPSS.PNG')
+```
+
+### SAS
+
+```{r eval=F}
+proc anova data=FIanova;
+      class Norms Standing;
+	  model Score = Norms Standing Norms*Standing;
+   run;
+```
+
+```{r FIanovaSAS, echo=FALSE, fig.cap="\\label{fig:FIanovaSAS}SAS Output for Independent Factorial ANOVA"}
+knitr::include_graphics('Screenshots/Factorial Independent ANOVA/FIanovaSAS.PNG')
+```
+
+### Minitab
+
+```{r FIanovaMinitab, echo=FALSE, fig.cap="\\label{fig:FIanovaMinitab}Minitab Output for Independent Factorial ANOVA"}
+knitr::include_graphics('Screenshots/Factorial Independent ANOVA/FIanovaMinitab.PNG')
+```
+
+### R
+
+```{r}
+FIanova.data2 <- read.csv("Datasets/FIanova.csv", sep=";")
+## Compute the analysis of variance
+results.anova <- aov(FIanova.data2$Score ~ FIanova.data2$Standing * FIanova.data2$Norms, data = FIanova.data2)
+## Summary of the analysis
+summary(results.anova)
+```
+
+
+### Remarks
+
+
+All differences in results between the software and hand calculation are due to rounding.

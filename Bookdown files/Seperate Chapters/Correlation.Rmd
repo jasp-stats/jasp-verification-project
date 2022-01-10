@@ -1,0 +1,98 @@
+
+## Correlation
+
+An example from Hays (1974, pp. 633-635):
+
+"The teacher collected data for a class of 91 students, obtaining for each a score *X*, based on the number of courses in high-school mathematics, and a score *Y*, the actual score on the final examination for the course."
+
+```{r echo = F}
+corr.data <- data.frame(X = c(rep(2, 10), rep(2.5, 11), rep(3, 10), rep(3.5, 14), rep(4, 15), rep(4.5, 3), rep(5, 4),
+                   rep(5.5, 3), rep(6, 6), rep(6.5, 4), rep(7, 3), rep(7.5, 4), rep(8, 4)),
+           Y = c(22, 17, 16, 14, 10, 9, 7, 5, 3, 2, 26, 23, 18, 18, 16, 13, 12, 10, 10, 7, 6,
+                 29, 26, 26, 24, 24, 23, 22, 16, 9, 8, 34, 26, 25, 23, 23, 22, 22, 19, 18, 17, 17, 17,
+                 12, 8, 36, 35, 30, 27, 25, 25, 24, 21, 20, 19, 19, 18, 18, 12, 3, 28, 27, 16, 41, 32,
+                 27, 19, 32, 25, 25, 46, 38, 34, 33, 27, 20, 44, 37, 32, 28, 52, 46, 37, 42, 41, 38, 35
+                 , 53, 48, 40, 40))
+knitr::kable(head(corr.data, 91), caption = "Data for Correlation", booktabs = T)
+
+```
+
+### Results Overview
+
+```{r echo=F}
+ResultsCorrelation <- matrix(c(0.81, 0.8064, 0.806, 0.8064, 0.806, 0.8064,
+                               NA, 0.7730, 0.773, 0.773, 0.773, 0.773,
+                           NA, 0.6121, 0.612, 0.612, NA, 0.612), ncol=6, byrow = T)
+colnames(ResultsCorrelation) <- c('By Hand', 'JASP', 'SPSS', 'SAS', 'Minitab', 'R')
+rownames(ResultsCorrelation) <- c('Pearson', 'Spearman', 'Kendall')
+knitr::kable(head(ResultsCorrelation, 20), caption = "Result Overview Correlation", booktabs = T)
+```
+
+### By Hand
+
+Calculations by hand can be found in Hays, 1974, pp. 633-635.
+
+Result: r = 0.81
+
+**Note:** Hays calculated only the Pearson correlation coefficient.
+
+### JASP
+
+```{r corrJASP, echo=FALSE, fig.cap="\\label{fig:corrJASP}JASP Output for Correlation"}
+knitr::include_graphics('Screenshots/Correlation/corrJASP.PNG')
+```
+### SPSS
+
+```{r eval = F}
+DATASET ACTIVATE DataSet1.
+CORRELATIONS
+  /VARIABLES=Y X
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+NONPAR CORR
+  /VARIABLES=Y X
+  /PRINT=BOTH TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+```
+
+
+```{r corrSPSS, echo=FALSE, fig.cap="\\label{fig:corrSPSS}SPSS Output for Correlation"}
+knitr::include_graphics('Screenshots/Correlation/corrSPSS.PNG')
+```
+
+### SAS
+
+```{r eval = F}
+PROC CORR DATA=Correlation pearson spearman kendall;
+    VAR X;
+    WITH Y;
+RUN;
+```
+
+```{r corrSAS, echo=FALSE, fig.cap="\\label{fig:corrSAS}SAS Output for Correlation"}
+knitr::include_graphics('Screenshots/Correlation/corrSAS.PNG')
+```
+
+### Minitab
+
+```{r corrMinitab, echo=FALSE, fig.cap="\\label{fig:corrMinitab}Minitab Output for Pearson Correlation"}
+knitr::include_graphics('Screenshots/Correlation/corrMinitab.PNG')
+```
+
+```{r corrMinitab2, echo=FALSE, fig.cap="\\label{fig:corrMinitab2}Minitab Output for Spearman Correlation"}
+knitr::include_graphics('Screenshots/Correlation/corrMinitab2.PNG')
+```
+
+### R
+
+```{r}
+cor.test(corr.data$X, corr.data$Y, method ="pearson")
+cor.test(corr.data$X, corr.data$Y, method ="spearman")
+cor.test(corr.data$X, corr.data$Y, method ="kendall")
+
+```
+
+
+### Remarks
+
+All differences in results between the software and hand calculation are due to rounding.

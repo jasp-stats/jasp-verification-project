@@ -1,0 +1,88 @@
+
+## ANCOVA
+
+An example from Field (2018 pp. 522-523, 576-577):
+
+"Imagine we wanted to contribute to this literature by running a study in which we randomized people into three groups: (1) a control group [...]; (2) 15 minutes of puppy therapy (a low-dose group); and (3) 30 minutes of puppy contact (a high-dose group). The dependent variable was a measure of happiness ranging from 0 (as unhappy as I can possibly imagine being) to 10 (as happy as I can possibly imagine being). [...] The researchers [...] suddenly realized that a participant's love of dogs would affect whether puppy therapy would affect happiness. Therefore, they repeated the study on different participants, but included a self-report measure of love of puppies from 0 [...] to 7." 
+
+```{r echo=F}
+ANCOVA.data <- read.csv("Datasets/ANCOVA.csv", sep=";")
+colnames(ANCOVA.data) <- c("Person", "Dose", "Happiness", "Puppy_love")
+knitr::kable(head(ANCOVA.data, 20), caption = "Data for ANCOVA", booktabs = T)
+```
+### Results Overview
+
+```{r echo=F}
+ResultsANCOVA <- matrix(c(4.1419, 4.142, 4.14, 4.14, 4.1419,
+                          4.9587, 4.959, 4.96, 4.96, 4.9587), ncol=5, byrow = T)
+colnames(ResultsANCOVA) <- c('JASP', 'SPSS', 'SAS', 'Minitab', 'R')
+rownames(ResultsANCOVA) <- c('F (Dose)', 'F (Puppy_love)')
+knitr::kable(head(ResultsANCOVA, 20), caption = "Result Overview ANCOVA", booktabs = T)
+```
+
+
+### JASP
+
+```{r ancovaJASP, echo=FALSE, fig.cap="\\label{fig:ancovaJASP}JASP Output for ANCOVA"}
+knitr::include_graphics('Screenshots/ANCOVA/ancovaJASP.PNG')
+```
+
+### SPSS
+
+```{r eval=F}
+UNIANOVA Happiness BY Dose WITH Puppy_love
+  /CONTRAST(Dose)=Simple
+  /METHOD=SSTYPE(3)
+  /INTERCEPT=INCLUDE
+  /PRINT ETASQ
+  /CRITERIA=ALPHA(.05)
+  /DESIGN=Puppy_love Dose.
+```
+
+```{r ancovaSPSS, echo=FALSE, fig.cap="\\label{fig:ancovaSPSS}SPSS Output for ANCOVA"}
+knitr::include_graphics('Screenshots/ANCOVA/ancovaSPSS.PNG')
+```
+
+```{r ancovaSPSS2, echo=FALSE, fig.cap="\\label{fig:ancovaSPSS2}SPSS Output for ANCOVA Contrasts"}
+knitr::include_graphics('Screenshots/ANCOVA/contrastsSPSS.PNG')
+```
+### SAS
+
+```{r eval=F}
+PROC GLM data=work.ANCOVA;
+CLASS Dose;
+MODEL Happiness = Dose Puppy_love / SOLUTION ss3;
+LSMEANS Dose / STDERR PDIFF CL ADJUST = BON;
+OUTPUT OUT = pred p=ybar r=resid;
+RUN;
+```
+
+```{r ancovaSAS, echo=FALSE, fig.cap="\\label{fig:ancovaSAS}SAS Output for ANCOVA"}
+knitr::include_graphics('Screenshots/ANCOVA/ancovaSAS.PNG')
+```
+
+
+### Minitab
+
+```{r ancovaMinitab, echo=FALSE, fig.cap="\\label{fig:ancovaMinitab}Minitab Output for ANCOVA"}
+knitr::include_graphics('Screenshots/ANCOVA/ancovaMinitab.PNG')
+```
+
+
+### R
+
+```{r echo=F}
+ANCOVA.data <- read.csv("Datasets/ANCOVA.csv", sep=";")
+colnames(ANCOVA.data) <- c("Person", "Dose", "Happiness", "Puppy_love")
+```
+
+```{r}
+## install.packages("car")
+library("car")
+fit <- aov(Happiness~as.factor(Dose) + Puppy_love, data = ANCOVA.data)
+Anova(fit, type = "III")
+```
+### Remarks
+
+All differences in results between the software are due to rounding.
+

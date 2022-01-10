@@ -1,0 +1,85 @@
+## Multinomial Test / Chi-square Goodness of Fit Test
+
+### Example 
+Think of colored marbles mixed together in a box, where the following probability distribution holds:
+
+```{r echo=F}
+Pdist <- data.frame('Color' = c('Black', 'Red', 'White'), "p" = c(0.40,0.30, 0.30))
+knitr::kable(head(Pdist, 20), caption = "Probability Distribution for Multinomial Test Example", booktabs = T)
+```
+
+Now suppose that 10 marbles were drawn at random and with replacement. The samples shows 2 black, 3 red, and 5 white.
+
+```{r echo=F}
+MNsample <- data.frame('Color' = c('Black', 'Red', 'White'), "Count" = c(2,3,5), "Expected" = c(4,3,3))
+knitr::kable(head(MNsample, 20), caption = "Sample for Multinomial Test Example", booktabs = T)
+```
+
+
+### Results Overview
+
+```{r echo=F}
+ResultsMNT <- matrix(c(rep(2.333,5)), ncol=5, byrow = T)
+colnames(ResultsMNT) <- c('JASP', 'SPSS', 'SAS', 'Minitab', 'R')
+rownames(ResultsMNT) <- "$\\chi ^2$"
+knitr::kable(head(ResultsMNT, 20), caption = "Result Overview Multinomial Test", booktabs = T)
+```
+
+
+### JASP
+
+
+```{r mntJASP, echo=FALSE, fig.cap="\\label{fig:mntJASP}JASP Output for Multinomial Test"}
+knitr::include_graphics('Screenshots/Multinomial Test/mntJASP.PNG')
+```
+
+### SPSS
+
+```{r eval=F}
+DATASET ACTIVATE DataSet1.
+NPAR TESTS
+  /CHISQUARE=Numbered
+  /EXPECTED=4 3 3
+  /MISSING ANALYSIS.
+```
+
+
+```{r mntSPSS, echo=FALSE, fig.cap="\\label{fig:mntSPSS}SPSS Output for Multinomial Test"}
+knitr::include_graphics('Screenshots/Multinomial Test/mntSPSS.PNG')
+```
+
+### SAS
+
+```{r eval=F}
+PROC FREQ DATA = chisquared;
+TABLES Sex*Preference / chisq;
+run;
+```
+
+
+```{r mntSAS, echo=FALSE, fig.cap="\\label{fig:mntSAS}SAS Output for Multinomial Test"}
+knitr::include_graphics('Screenshots/Multinomial Test/mntSAS.PNG')
+```
+
+### Minitab
+
+```{r mntMinitab, echo=FALSE, fig.cap="\\label{fig:mntMinitab}Minitab Output for Multinomial Test"}
+knitr::include_graphics('Screenshots/Multinomial Test/mntMinitab.PNG')
+```
+
+
+
+### R
+
+
+
+```{r}
+chisq.test(MNsample$Count, p = Pdist$p)
+```
+
+
+### Remarks
+
+All differences in results between the software are due to rounding.
+
+

@@ -1,0 +1,96 @@
+## Kruskal-Wallis ANOVA
+
+
+An example from Hays (1974, pp. 782-784):
+
+"For example, suppose that three groups of small children were given the task of learning to discriminate between pairs of stimuli. Each child was given a series of pairs of stimuli, in which each pair differed in a variety of ways. However, attached to the choice of one member of a pair was a reward, and within an experimental condition, the cue for the rewarded stimulus was always the same. On the other hand, the experimental treatments themselves differed in the relevant cue for discrimination: in treatment I, the cue was form, in treatment II, color, and in treatment III, size. Some 36 children of the same sex and age were chosen at random and assigned at random to the three groups, with 12 children per group. The dependent variable was the number of trials to a fixed criterion of learning. Suppose that the data turned out the be as shown[...]"
+
+```{r echo=F}
+KWA.data <- data.frame("Treatment I" = c(6,11,12,20,24,21,18,15,14,10,8,14), "Treatment II" = c(31,7,9,11,16,19,17,11,22,23,27,26), "Treatment III" = c(13,32,31,30,28,29,25,26,26,27,26,19))
+knitr::kable(head(KWA.data, 20), caption = "Data for Kruskal-Wallis ANOVA", booktabs = T)
+```
+
+### Results Overview
+
+```{r echo=F}
+ResultsKWA <- matrix(c(13.85, 13.8444, 13.844, 13.8444, 13.84, 13.844), ncol=6, byrow = T)
+colnames(ResultsKWA) <- c('By Hand', 'JASP', 'SPSS', 'SAS', 'Minitab', 'R')
+rownames(ResultsKWA) <- "H'"
+knitr::kable(head(ResultsKWA, 20), caption = "Result Overview Kruskal-Wallis ANOVA", booktabs = T)
+```
+
+### By Hand
+
+Calculations by hand can be found in Hays, 1974, pp. 782-784.
+
+Result: 
+
+H = 13.85
+
+Significant for $\alpha$ = .01 or less.
+
+
+### JASP
+
+
+```{r kwaJASP, echo=FALSE, fig.cap="\\label{fig:kwaJASP}JASP Output for Kruskal-Wallis ANOVA"}
+knitr::include_graphics('Screenshots/Kruskal-Wallis ANOVA/kwaJASP.PNG')
+```
+
+
+### SPSS
+
+```{r eval=F}
+DATASET ACTIVATE DataSet1.
+*Nonparametric Tests: Independent Samples. 
+NPTESTS 
+  /INDEPENDENT TEST (Score) GROUP (Treatment) KRUSKAL_WALLIS(COMPARE=NONE) 
+  /MISSING SCOPE=ANALYSIS USERMISSING=EXCLUDE
+  /CRITERIA ALPHA=0.05  CILEVEL=95.
+```
+
+
+```{r kwaSPSS, echo=FALSE, fig.cap="\\label{fig:kwaSPSS}SPSS Output for Kruskal-Wallis ANOVA"}
+knitr::include_graphics('Screenshots/Kruskal-Wallis ANOVA/kwaSPSS.PNG')
+```
+
+
+### SAS
+
+```{r eval=F}
+PROC npar1way data=work.KWanova ;
+class Treatment;
+var Score;
+run;
+```
+
+
+```{r kwaSAS, echo=FALSE, fig.cap="\\label{fig:kwaSAS}SAS Output for Kruskal-Wallis ANOVA"}
+knitr::include_graphics('Screenshots/Kruskal-Wallis ANOVA/kwaSAS.PNG')
+```
+
+
+### Minitab
+
+```{r kwaMinitab, echo=FALSE, fig.cap="\\label{fig:kwaMinitab}Minitab Output for Kruskal-Wallis ANOVA"}
+knitr::include_graphics('Screenshots/Kruskal-Wallis ANOVA/kwaMinitab.PNG')
+```
+
+
+
+### R
+```{r echo=F}
+KWA.data2 <- read.csv("Datasets/KWanova.csv", sep=";")
+```
+
+
+```{r}
+kruskal.test(Score~Treatment, data = KWA.data2)
+```
+
+
+### Remarks
+
+All differences in results between the software and hand calculation are due to rounding.
+
+

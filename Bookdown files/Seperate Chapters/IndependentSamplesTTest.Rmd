@@ -1,0 +1,116 @@
+
+## Independent Samples T-Test
+
+An example from Hays (1974, pp. 404-407):
+
+"An experimenter working in the area of motivational factors in perception was interested in the effects of deprivation upon the perceived size of objects. Among the studies carried out was one done with orphans, who were compared with nonorphaned children on the basis of the judged size of parental figures viewed at a distance. [...]Now two independent randomly selected groups were used. Sample 1 was a group of orphaned children without foster parents. Sample 2 was a group of children having a normal family with both parents. Both population of children sampled showed the same age level, sex distribution, educational level, and so forth. The question asked by the experimenter was 'Do deprived children tend to judge the parental figures relatively larger than do the nondeprived?' In terms of a null and alternative hypothesis,
+
+H~0~: $\mu$~1~ - $\mu$~2~ $\le 0$
+
+H~1~: $\mu$~1~ - $\mu$~2~ $> 0$.
+
+The $\alpha$ level for significance decided upon was .05. The actual results were
+
+*Sample 1:*
+
+M~1~ = 1.8
+
+~S1~ = .7  
+
+N~1~ = 125                          
+
+*Sample 2:*
+
+M~2~ = 1.6
+
+~S2~ = .9
+
+N~2~ = 150"
+
+**Note**: A data set with these properties has been simulated using R.
+
+### Results Overview
+
+```{r echo=F}
+ResultsISTT <- matrix(c(2.11, 2.0717, 2.072, 2.07, 2.07, 2.0717
+                        , NA, 2.0257, 2.026, 2.03, 2.03, 2.0257), ncol=6, byrow = T)
+colnames(ResultsISTT) <- c('By Hand', 'JASP', 'SPSS', 'SAS', 'Minitab', 'R')
+rownames(ResultsISTT) <- c('t (Welch)', 't (Student)')
+knitr::kable(head(ResultsISTT, 20), caption = "Result Overview Independent Samples T-Test", booktabs = T)
+```
+
+### By Hand
+
+Calculations by hand can be found in Hays, 1974, pp. 404-407.
+
+Result: t = 2.11
+
+Significant (two-tailed test) for $\alpha$ = .05 or less
+
+**Note:** Hays calculated only the Welch T-test.
+
+### JASP
+
+
+```{r isttJASP, echo=FALSE, fig.cap="\\label{fig:isttJASP}JASP Output for Independent Samples T-Test"}
+knitr::include_graphics('Screenshots/Independent Samples T test/isttJASP.PNG')
+```
+
+### SPSS
+
+```{r eval=F}
+DATASET ACTIVATE DataSet1.
+T-TEST GROUPS=groups(1 2)
+  /MISSING=ANALYSIS
+  /VARIABLES=samples
+  /CRITERIA=CI(.95).
+```
+
+
+```{r isttSPSS, echo=FALSE, fig.cap="\\label{fig:isttSPSS}SPSS Output for Independent Samples T-Test"}
+knitr::include_graphics('Screenshots/Independent Samples T test/isttSPSS.PNG')
+```
+
+### SAS
+
+```{r eval=F}
+proc ttest data=istt sides=2 alpha=0.05 h0=0;
+ 	title "Two sample t-test";
+ 	class Group; 
+	var Score;
+   run;
+```
+
+
+```{r isttSAS, echo=FALSE, fig.cap="\\label{fig:isttSAS}SAS Output for Independent Samples T-Test"}
+knitr::include_graphics('Screenshots/Independent Samples T test/isttSAS.PNG')
+```
+
+### Minitab
+
+```{r isttMinitab, echo=FALSE, fig.cap="\\label{fig:isttMinitab}Minitab Output for Welch Independent Samples T-Test"}
+knitr::include_graphics('Screenshots/Independent Samples T test/isttMinitab.PNG')
+```
+
+```{r isttMinitab2, echo=FALSE, fig.cap="\\label{fig:isttMinitab2}Minitab Output for Student Independent Samples T-Test"}
+knitr::include_graphics('Screenshots/Independent Samples T test/isttMinitab2.PNG')
+```
+
+### R
+```{r echo=F}
+istt.data <- read.csv("Datasets/IndependentSamplettest.csv", sep=";")
+istt.data$Group <-as.factor(istt.data$Group)
+```
+
+
+```{r}
+t.test(subset(istt.data, Group == 1)$Score, subset(istt.data, Group == 2)$Score)
+```
+
+```{r}
+t.test(subset(istt.data, Group == 1)$Score, subset(istt.data, Group == 2)$Score, var.equal = T)
+```
+### Remarks
+
+All differences in results between the software and hand calculation are due to rounding.
+

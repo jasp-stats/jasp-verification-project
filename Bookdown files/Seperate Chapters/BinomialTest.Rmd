@@ -1,0 +1,99 @@
+## Binomial Test
+
+### Example 
+An example from Hays (1974, pp. 190-192): 
+
+
+"Think of a hypothetical study of this question: 'If a human is subjected to a stimulus below his threshold of conscious awareness, can his behavior somehow still be influenced by the presence of the stimulus?' The experimental task is as follows: the subject is seated in a room in front of a square screen divided into four equal parts. He is instructed that his task is to guess in which part of the screen a small, very faint, spot of light is thrown." 
+
+
+Under the null hypothesis H~0~, the number of correct guesses is expected to be 1/4 of the trials N. The alternative hypothesis H~1~ is that the number of correct guesses is larger than 1/4 of the trials N. 
+
+The subject obtained 7 correct guesses T out of 10 trials N. 
+
+What is the p-value of this result under H~0~?
+
+p = 0.25 
+
+N = 10
+
+T = 7
+
+
+### Results Overview
+
+```{r echo=F}
+ResultsBinomial <- matrix(c(0.0035,0.0035, 0.004, 0.0035, 0.004, 0.0035), ncol=6)
+colnames(ResultsBinomial) <- c('By Hand', 'JASP', 'SPSS', 'SAS', 'Minitab', 'R')
+rownames(ResultsBinomial) <- c('P')
+knitr::kable(head(ResultsBinomial, 20), caption = "Result Overview Binomial Test", booktabs = T)
+```
+
+
+
+### By Hand
+
+Calculations by hand can be found in Hays, 1974, pp. 190-192.
+
+Result: P = 0.0035
+
+
+
+### JASP
+```{r BinomialTestJASP, echo=FALSE, fig.cap="\\label{fig:BinomialTestJASP}JASP Output for Binomial Test"}
+knitr::include_graphics('Screenshots/Binomial Test/BinomialTestJASP.PNG')
+```
+
+
+### SPSS
+
+```{R eval=F}
+
+DATASET NAME DataSet1 WINDOW=FRONT. 
+*Nonparametric Tests: One Sample. 
+NPTESTS 
+  /ONESAMPLE TEST (Guesses) BINOMIAL(TESTVALUE=0.25 SUCCESSCATEGORICAL=FIRST SUCCESSCONTINUOUS=CUTPOINT(MIDPOINT)) 
+  /MISSING SCOPE=ANALYSIS USERMISSING=EXCLUDE 
+  /CRITERIA ALPHA=0.05 CILEVEL=95.
+
+```
+
+
+```{r BinomialTestSPSS, echo=FALSE, fig.cap="\\label{fig:BinomialTestSPSS}SPSS Output for Binomial Test"}
+knitr::include_graphics('Screenshots/Binomial Test/BinomialTestSPSS.PNG')
+```
+
+### SAS
+
+```{R eval=F}
+
+PROC Freq data=WORK.IMPORT;
+	tables Guesses / binomial(p=.25 level=2);
+	exact binomial;
+run;
+
+```
+
+
+```{r BinomialTestSAS, echo=FALSE, fig.cap="\\label{fig:BinomialTestSAS}SAS Output for Binomial Test"}
+knitr::include_graphics('Screenshots/Binomial Test/BinomialTestSAS.PNG')
+```
+
+### Minitab
+
+
+```{r BinomialTestMinitab, echo=FALSE, fig.cap="\\label{fig:BinomialTestMinitab}Minitab Output for Binomial Test"}
+knitr::include_graphics('Screenshots/Binomial Test/BinomialTestMinitab.PNG')
+```
+
+### R
+
+```{r}
+binom.test(7, 10, p = 0.25, alternative = "greater")
+```
+
+### Remarks
+
+All differences in results between the software and hand calculation are due to rounding.
+
+

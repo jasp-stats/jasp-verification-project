@@ -1,0 +1,85 @@
+## Wilcoxon Test
+
+
+An example from Hays (1974, pp. 780-781):
+
+"Suppose that in some experiment involving a single treatment and one control group, subjects were first matched pairwise, and then one member of each pair was assigned to the experimental group at random. In the experiment proper, each subject received some Y score."
+
+```{r echo=F}
+Wilcoxon.data <- data.frame("Treatment " = c(83,80,81,74,79,78,72,84,85,88), "Control" = c(75,78,66,77,80,68,75,90,81,83))
+knitr::kable(head(Wilcoxon.data, 20), caption = "Data for Wilcoxon Test", booktabs = T)
+```
+
+### Results Overview
+
+```{r echo=F}
+ResultsWilcoxon <- matrix(c(15, 15, 15, NA, 15, 15), ncol=6, byrow = T)
+colnames(ResultsWilcoxon) <- c('By Hand', 'JASP', 'SPSS', 'SAS', 'Minitab', 'R')
+rownames(ResultsWilcoxon) <- "W'"
+knitr::kable(head(ResultsWilcoxon, 20), caption = "Result Overview Wilcoxon Test", booktabs = T)
+```
+
+### By Hand
+
+Calculations by hand can be found in Hays, 1974, pp. 780-781.
+
+Result: 
+
+T = 15
+
+Not significant for $\alpha$ = .05 or less.
+
+
+### JASP
+
+
+```{r WilcoxonJASP, echo=FALSE, fig.cap="\\label{fig:WilcoxonJASP}JASP Output for Wilcoxon Test"}
+knitr::include_graphics('Screenshots/Wilcoxon Test/WilcoxonJASP.PNG')
+```
+
+
+### SPSS
+
+```{r eval=F}
+DATASET ACTIVATE DataSet1.
+*Nonparametric Tests: Related Samples. 
+NPTESTS 
+  /RELATED TEST(Treatment Control) WILCOXON 
+  /MISSING SCOPE=ANALYSIS USERMISSING=EXCLUDE
+  /CRITERIA ALPHA=0.05  CILEVEL=95.
+
+```
+
+
+```{r WilcoxonSPSS, echo=FALSE, fig.cap="\\label{fig:WilcoxonSPSS}SPSS Output for Wilcoxon Test"}
+knitr::include_graphics('Screenshots/Wilcoxon Test/WilcoxonSPSS.PNG')
+```
+
+### SAS
+
+Not available in SAS.
+
+### Minitab
+
+```{r WilcoxonMinitab, echo=FALSE, fig.cap="\\label{fig:WilcoxonMinitab}Minitab Output for Wilcoxon Test"}
+knitr::include_graphics('Screenshots/Wilcoxon Test/WilcoxonMinitab.PNG')
+```
+
+
+
+### R
+```{r echo=F}
+Wilcoxon.data2 <- read.csv("Datasets/Wilcoxon.csv", sep=";")
+```
+
+
+```{r}
+wilcox.test(Wilcoxon.data2$Control, Wilcoxon.data2$Treatment., paired = T)
+```
+
+
+### Remarks
+
+All differences in results between the software and hand calculation are due to rounding.
+
+

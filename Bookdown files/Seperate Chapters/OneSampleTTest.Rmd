@@ -1,0 +1,91 @@
+
+## One Sample T-Test
+
+A dataset with the following properties has been generated using R:
+
+n = 100
+
+M = 5
+
+$\sigma$ = 1
+
+The expected mean to perform the One Sample T-test against is:
+
+E(M) = 3
+
+The  alpha level was chosen to be:
+
+$\alpha$ = .05
+
+### Results Overview
+
+```{r echo=F}
+ResultsOSTT <- matrix(c(20, 20, 20, 20, 20, 20), ncol=6)
+colnames(ResultsOSTT) <- c('By Hand', 'JASP', 'SPSS', 'SAS', 'Minitab', 'R')
+rownames(ResultsOSTT) <- c('t')
+knitr::kable(head(ResultsOSTT, 20), caption = "Result Overview One Sample T-Test", booktabs = T)
+```
+
+
+### By Hand
+t = $\frac{M - E(M) }{\sigma/\sqrt{n}}$
+
+therefore:
+
+t = $\frac{5-3}{1/\sqrt{100}}$ = $\frac{2}{1/10}$ = 20
+
+A t-score of 20 is significant for a two tailed test at $\alpha$ = .05 or less.
+
+### JASP
+
+```{r osttJASP, echo=FALSE, fig.cap="\\label{fig:osttJASP}JASP Output for One Sample T-Test"}
+knitr::include_graphics('Screenshots/One Sample T test/osttJASP.PNG')
+```
+### SPSS
+
+```{r eval=F}
+DATASET ACTIVATE DataSet1.
+T-TEST
+  /TESTVAL=3
+  /MISSING=ANALYSIS
+  /VARIABLES=V1
+  /CRITERIA=CI(.95).
+```
+
+```{r osttSPSS, echo=FALSE, fig.cap="\\label{fig:osttSPSS}SPSS Output for One Sample T-Test"}
+knitr::include_graphics('Screenshots/One Sample T test/osttSPSS.PNG')
+```
+
+### SAS
+
+```{r eval=F}
+proc ttest data=work.OSTT sides=2 alpha=0.05  h0=3;
+      var Data;
+   run;
+```
+
+```{r osttSAS, echo=FALSE, fig.cap="\\label{fig:osttSAS}SAS Output for One Sample T-Test"}
+knitr::include_graphics('Screenshots/One Sample T test/osttSAS.PNG')
+```
+
+
+### Minitab
+
+```{r osttMinitab, echo=FALSE, fig.cap="\\label{fig:osttMinitab}Minitab Output for One Sample T-Test"}
+knitr::include_graphics('Screenshots/One Sample T test/osttMinitab.PNG')
+```
+
+### R
+
+```{r echo = F}
+ostt.data2 <- read.csv("Datasets/OSTT.csv", sep=";")
+```
+
+```{r}
+t.test(ostt.data2$V1, mu = 3)
+```
+
+
+### Remarks
+
+All differences in results between the software and hand calculation are due to rounding.

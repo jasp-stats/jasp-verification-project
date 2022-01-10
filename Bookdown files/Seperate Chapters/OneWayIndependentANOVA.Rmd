@@ -1,0 +1,100 @@
+
+
+## One-Way Independent ANOVA
+
+An example from Hays (1974, pp. 476-478):
+
+"An experiment was carried out to study the effect of a small lesion introduced into a particular structure in a rat's brain on his ability to perform in a discrimination problem. The particular structure studied is bilaterally symmetric. so that the lesion could be introduced into the structure on the right side of the brain, the left side, both sides, or neither side (a control group). Four groups of randomly selected rats were formed, and given the various treatments.[...] After a period of postoperative recovery, each rats was given the same series of discrimination problems. The dependent variable score was the average number of trials it took each rat to learn the task to some criterion level. The null hypothesis was that the four treatment populations of rats are identical in their average ability to learn this task:
+
+H~0~: $\mu$~1~ = $\mu$~2~ = $\mu$~3~ = $\mu$~4~
+
+as against the hypothesis that treatment differences exist:
+
+H~1~: not H~0~.
+
+The alpha level chosen for the experiment was .05."
+
+```{r echo = F}
+anova.data <- data.frame(Score = c(20, 18, 26, 19, 26, 24, 26, 24, 22, 25, 25, 20, 21, 34, 18, 32, 23, 22, 20, 22, 30, 27 ,22 ,24, 28, 21, 23, 25, 18, 30, 32, 27, 35, 18, 24, 28, 32, 16, 18, 25), Group = as.factor(c(rep(1, 7), rep(2, 11), rep(3, 13), rep(4,9))))
+knitr::kable(head(anova.data, 91), caption = "Data for One-Way Independent ANOVA", booktabs = T)
+```
+
+
+### Results Overview
+
+```{r echo=F}
+ResultsANOVA <- matrix(c(7.5/24.4, 0.3082, 0.308, 0.31, 0.31, 0.308), ncol=6)
+colnames(ResultsANOVA) <- c('By Hand', 'JASP', 'SPSS', 'SAS', 'Minitab', 'R')
+rownames(ResultsANOVA) <- c('F')
+knitr::kable(head(ResultsANOVA, 20), caption = "Result Overview One-Way Independent ANOVA", booktabs = T)
+```
+
+### By Hand
+
+Calculations by hand can be found in Hays, 1974, pp. 476-478.
+
+Results: 
+
+```{r echo = F}
+anova.results.hays <- data.frame(Source = c("Treatments (between groups)", "Error (within groups)", "Totals"), SS = c(22.6, 878.9, 901.5), df = c(3, 36, 39), MS = c(7.5, 24.4, NA), F = c(7.5/24.4, NA, NA))
+knitr::kable(head(anova.results.hays, 20), caption = "Result from Hays (1974)", booktabs = T)
+```
+
+**Conclusion:** The null hypothesis cannot be rejected, because the critical F value was 2.84.
+
+**Note**: Hays reported F =$\frac{7.5}{24.4}$. For a better comparison we transformed it to a decimal number.
+
+### JASP
+
+```{r anovaJASP, echo=FALSE, fig.cap="\\label{fig:anovaJASP}JASP Output for One-Way Independent ANOVA"}
+knitr::include_graphics('Screenshots/ANOVA/anovaJASP.PNG')
+```
+
+### SPSS
+
+```{r eval=F}
+DATASET ACTIVATE DataSet1.
+ONEWAY Score BY Group
+  /MISSING ANALYSIS.
+
+```
+
+```{r anovaSPSS, echo=FALSE, fig.cap="\\label{fig:anovaSPSS}SPSS Output for One-Way Independent ANOVA"}
+knitr::include_graphics('Screenshots/ANOVA/anovaSPSS.PNG')
+```
+
+### SAS
+
+```{r eval=F}
+proc ANOVA data=anova;
+	title One-way ANOVA;
+	class Group;
+	model Score = Group;
+	means Group /hovtest welch;
+	run;
+```
+
+```{r anovaSAS, echo=FALSE, fig.cap="\\label{fig:anovaSAS}SAS Output for One-Way Independent ANOVA"}
+knitr::include_graphics('Screenshots/ANOVA/anovaSAS.PNG')
+```
+
+### Minitab
+
+```{r anovaMinitab, echo=FALSE, fig.cap="\\label{fig:anovaMinitab}Minitab Output for One-Way Independent ANOVA"}
+knitr::include_graphics('Screenshots/ANOVA/anovaMinitab.PNG')
+```
+
+### R
+
+```{r}
+## Compute the analysis of variance
+results.anova <- aov(anova.data$Score ~ anova.data$Group, data = anova.data)
+## Summary of the analysis
+summary(results.anova)
+```
+
+
+### Remarks
+
+
+All differences in results between the software and hand calculation are due to rounding.

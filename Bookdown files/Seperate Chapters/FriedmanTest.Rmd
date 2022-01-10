@@ -1,0 +1,89 @@
+## Friedman Test
+
+
+An example from Hays (1974, pp. 785-786):
+
+"For example, in an experiment with four experimental treatments (J = 4), 11 groups of 4 matched subjects apiece were used. Within each matched group the four subjects were assigned at random to the four treatments, on subject per treatment."
+
+```{r echo=F}
+Friedman.data <- data.frame("Groups" = c(1:11), "Treatment I" = c(1, 2, 10, 12, 1, 10, 4, 10, 10, 14, 3),
+                       "Treatment II" = c(4,3,0,11,3,3,12,4,4,4,2), "Treatment III" = c(8,13,11,13,10,11,10,5,9,7,4),
+                        "Treatment IV" = c(0,1,3,10,0,9,11,3,3,2,13))
+knitr::kable(head(Friedman.data, 20), caption = "Data for Friedman Test", booktabs = T)
+```
+
+### Results Overview
+
+```{r echo=F}
+ResultsFriedman <- matrix(c(11.79, 11.9455, 11.945, NA, 11.95, 11.945), ncol=6, byrow = T)
+colnames(ResultsFriedman) <- c('By Hand', 'JASP', 'SPSS', 'SAS', 'Minitab', 'R')
+rownames(ResultsFriedman) <- '$\\chi^2$'
+knitr::kable(head(ResultsFriedman, 20), caption = "Result Overview Friedman Test", booktabs = T)
+```
+
+### By Hand
+
+Calculations by hand can be found in Hays, 1974, pp. 785-786.
+
+Result: 
+
+$\chi^2$ = 11.79
+
+Significant for $\alpha$ = .01 or less.
+
+
+### JASP
+
+
+```{r FriedmanJASP, echo=FALSE, fig.cap="\\label{fig:FriedmanJASP}JASP Output for Friedman Test"}
+knitr::include_graphics('Screenshots/Friedman Test/FriedmanJASP.PNG')
+```
+
+
+### SPSS
+
+```{r eval=F}
+DATASET ACTIVATE DataSet1.
+*Nonparametric Tests: Related Samples. 
+NPTESTS 
+  /RELATED TEST(Treatment.I Treatment.II Treatment.III Treatment.IV) FRIEDMAN(COMPARE=NONE) 
+  /MISSING SCOPE=ANALYSIS USERMISSING=EXCLUDE
+  /CRITERIA ALPHA=0.05  CILEVEL=95.
+
+```
+
+
+```{r FriedmanSPSS, echo=FALSE, fig.cap="\\label{fig:FriedmanSPSS}SPSS Output for Friedman Test"}
+knitr::include_graphics('Screenshots/Friedman Test/FriedmanSPSS.PNG')
+```
+
+
+### SAS
+
+Not available in SAS.
+
+
+### Minitab
+
+```{r FriedmanMinitab, echo=FALSE, fig.cap="\\label{fig:FriedmanMinitab}Minitab Output for Friedman Test"}
+knitr::include_graphics('Screenshots/Friedman Test/FriedmanMinitab.PNG')
+```
+
+
+
+### R
+```{r echo=F}
+Friedman.data2 <- read.csv("Datasets/Friedman2.csv", sep=";")
+```
+
+
+```{r}
+friedman.test(Friedman.data2$Score, groups = Friedman.data2$Treatment, blocks = Friedman.data2$Groups)
+```
+
+
+### Remarks
+
+All differences in results between the software and hand calculation are due to rounding.
+
+
