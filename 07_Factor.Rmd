@@ -24,8 +24,16 @@ knitr::kable(head(ResultsEFA, 20), caption = "Result Overview Exploratory Factor
 
 ### JASP {#jaspPCA}
 
-```{r pcaJASP, echo=FALSE, fig.cap="\\label{fig:pcaJASP}JASP Output for Principal Component Analysis"}
-knitr::include_graphics('Screenshots/Principal Component Analysis/pcaJASP.PNG')
+```{r pcaJASP1, echo=FALSE, fig.cap="\\label{fig:pcaJASP1}JASP Output for Principal Component Analysis"}
+knitr::include_graphics('Screenshots/Principal Component Analysis/pcaJASP1.PNG')
+```
+
+```{r pcaJASP2, echo=FALSE, fig.cap="\\label{fig:pcaJASP2}JASP Output for Principal Component Analysis"}
+knitr::include_graphics('Screenshots/Principal Component Analysis/pcaJASP2.PNG')
+```
+
+```{r pcaJASP3, echo=FALSE, fig.cap="\\label{fig:pcaJASP3}JASP Output for Principal Component Analysis"}
+knitr::include_graphics('Screenshots/Principal Component Analysis/pcaJASP3.PNG')
 ```
 
 ### SPSS {#spssPCA}
@@ -114,7 +122,7 @@ fit2 ## print results
 ```
 ### Remarks {#remarksPCA}
 
-The rotation used was "Varimax". The differences in the results of the rotated factor solutions between the software are due to different optimization methods used.
+The rotation used was "Varimax". The differences in the results of the rotated factor solutions between the software are due to differences in the optimization methods used.
 
 
 
@@ -223,7 +231,7 @@ fit ## print results
 ```
 ### Remarks {#remarksEFA}
  
-The method used was "Principal Axis Factoring" and the rotation used was "Varimax". The differences in the results of the rotated factor solutions between the software are due to different optimization methods used.
+The method used was "Principal Axis Factoring" and the rotation used was "Varimax". The differences in the results of the rotated factor solutions between the software are due to differences in the optimization methods used.
 
 
 
