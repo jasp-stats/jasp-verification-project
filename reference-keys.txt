@@ -126,7 +126,9 @@ fig:cstSPSS
 fig:cstSAS
 fig:cstMinitab
 tab:unnamed-chunk-116
-fig:pcaJASP
+fig:pcaJASP1
+fig:pcaJASP2
+fig:pcaJASP3
 fig:pcaSPSS
 fig:pcaSPSS2
 fig:pcaSAS
