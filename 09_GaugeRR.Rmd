@@ -11,7 +11,6 @@ dat$Part <- as.factor(dat$Part)
 knitr::kable(dat, caption = "Example Data from Houf & Berman (1988)", booktabs = T)
 ```
 
-
 ### Results Overview {#ResultsGRR}
 
 #### Variance Components
@@ -32,9 +31,10 @@ knitr::kable(resultsGRR, caption = "Results Overview Variance Components", bookt
 resultsGRR2 <- matrix(c(3.6, 1.02, 2.58, 1.13, 1.45, 96.4, 100,
                         3.6, 1.02, 2.58, 1.13, 1.45, 96.4, 100,
                         3.6, 1.02, 2.58, 1.13, 1.45, 96.4, 100,
+                        3.6, 1.02, 2.58, 1.13, 1.45, 96.4, 100,
                         3.6, 1.02, 2.58, 1.13, 1.45, 96.4, 100),
-                     nrow = 7, ncol = 4, byrow = FALSE)
-colnames(resultsGRR2) <- colnames(resultsGRR)[-4]
+                     nrow = 7, ncol = 5, byrow = FALSE)
+colnames(resultsGRR2) <- colnames(resultsGRR)
 rownames(resultsGRR2) <- rownames(resultsGRR)
 knitr::kable(resultsGRR2, caption = "Results Overview % Contribution", booktabs = T)
 ```
@@ -113,17 +113,20 @@ rownames(res) <- c("Total Gage R&R", "Repeatability", "Reproducibility", "Operat
 
 res
 ```
+
 ### JMP {#jmpGRR}
 ```{r grrJMP, echo=FALSE, fig.cap="\\label{fig:grrJMP}JMP Output for Type 2 Gauge r&R Analysis"}
 knitr::include_graphics('Screenshots/Gauge R&R/grrJMP.png')
 ```
 
-
 ### Minitab {#minitabGRR}
-```{r grrMinitab, echo=FALSE, fig.cap="\\label{fig:grrMinitab}Minitab Output for Type 2 Gauge r&R Analysis taken from Montgomery (2012)"}
-knitr::include_graphics('Screenshots/Gauge R&R/grrMinitab.png')
+```{r grrMinitab1, echo=FALSE, fig.cap="\\label{fig:grrMinitab1}Minitab Output for Type 2 Gauge r&R Analysis (Part 1)"}
+knitr::include_graphics('Screenshots/Gauge R&R/grrMinitabPart1.png')
 ```
 
+```{r grrMinitab2, echo=FALSE, fig.cap="\\label{fig:grrMinitab2}Minitab Output for Type 2 Gauge r&R Analysis (Part 2)"}
+knitr::include_graphics('Screenshots/Gauge R&R/grrMinitabPart2.png')
+```
 
 ### R {#rGRR}
 ```{r}
@@ -142,7 +145,6 @@ knitr::kable(datType3, caption = "Type 3 Gauge R&R Data from Gadim & Doniavi (20
              booktabs = TRUE)
 ```
 
-
 ### Results Overview {#ResultsGRRType3}
 
 #### Variance Components
@@ -150,9 +152,10 @@ knitr::kable(datType3, caption = "Type 3 Gauge R&R Data from Gadim & Doniavi (20
 resultsGRRType3 <- matrix(c(2.371 * 10^-5, 2.371 * 10^-5, 0.014, 0.014,
                             2.371 * 10^-5, 2.371 * 10^-5, 0.014, 0.014,
                             2 * 10^-5, 2 * 10^-5, 0.014, 0.014,
+                            2.37 * 10^-5, 2.37 * 10^-5, 0.014, 0.014,
                             2.371 * 10^-5, 2.371 * 10^-5, 0.014, 0.014), 
-                          nrow = 4, ncol = 4, byrow = FALSE)
-colnames(resultsGRRType3) <- c("JASP", "By Hand", "JMP", "R")
+                          nrow = 4, ncol = 5, byrow = FALSE)
+colnames(resultsGRRType3) <- c("JASP", "By Hand", "JMP", "Minitab", "R")
 rownames(resultsGRRType3) <- c("Total Gage R&R", "Repeatability", "Part-To-Part", "Total Variation")
 knitr::kable(resultsGRRType3, caption = "Results Overview Variance Components", booktabs = T)
 ```
@@ -162,8 +165,9 @@ knitr::kable(resultsGRRType3, caption = "Results Overview Variance Components", 
 resultsGRR2Type3 <- matrix(c(0.16, 0.16, 99.84, 100,
                              0.16, 0.16, 99.84, 100,
                              0.16, 0.16, 99.84, 100,
+                             0.16, 0.16, 99.84, 100,
                              0.16, 0.16, 99.84, 100),
-                     nrow = 4, ncol = 4, byrow = FALSE)
+                     nrow = 4, ncol = 5, byrow = FALSE)
 colnames(resultsGRR2Type3) <- colnames(resultsGRRType3)
 rownames(resultsGRR2Type3) <- rownames(resultsGRRType3)
 knitr::kable(resultsGRR2Type3, caption = "Results Overview % Contribution", booktabs = T)
@@ -231,12 +235,20 @@ res
 knitr::include_graphics("Screenshots/Gauge R&R/grrType3JMP.png")
 ```
 
+### Minitab {#minitabGRR}
+```{r grrType3Minitab1, echo=FALSE, fig.cap="\\label{fig:grrType3Minitab1}Minitab Output for Type 3 Gauge r&R Analysis (Part 1)"}
+knitr::include_graphics('Screenshots/Gauge R&R/grrType3MinitabPart1.png')
+```
+
+```{r grrType3Minitab2, echo=FALSE, fig.cap="\\label{fig:grrType3Minitab2}Minitab Output for Type 3 Gauge r&R Analysis (Part 2)"}
+knitr::include_graphics('Screenshots/Gauge R&R/grrType3MinitabPart2.png')
+```
+
 ### R {#rGRRType3}
 ```{r}
 datType3$Operator <- rep(1, nrow(dat)) # as input for ss.rr() function
 ss.rr(Measurement, Part, Operator, data = datType3, print_plot = FALSE)
 ```
-
 
 ### Remarks {#remarksGRR}
 Variance components have been estimated using expected mean squares based on ANOVA in every software.
@@ -244,10 +256,7 @@ Variance components have been estimated using expected mean squares based on ANO
 ### References {#refGRR}
 Gadim, H. G., & Doniavi, A. (2018). Improving structural properties of polymer fibers to design and construct fiber spinneret and optimize process parameters using response surface method and gage R&R. *Journal of Mechanical Science and Technology, 32*(3), 1135–1142. https://doi.org/10.1007/s12206-018-0216-7
 
-
 Houf, R. E., & Berman, D. B. (1988). Statistical analysis of power module thermal test equipment performance. *IEEE Transactions on Components, Hybrids, and Manufacturing Technology, 11*(4), 516–520. https://doi.org/10.1109/33.16692
-
-Montgomery, D. C. (2012). *Introduction to statistical quality control* (7th edn). John Wiley & Sons.
 
 
 
