@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Regression | JASP Verificiation Project</title>
+  <title>Chapter 10 Type 2 &amp; 3 Gauge r&amp;R Study | JASP Verificiation Project</title>
   <meta name="description" content="Verification of JASP" />
   <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Regression | JASP Verificiation Project" />
+  <meta property="og:title" content="Chapter 10 Type 2 &amp; 3 Gauge r&amp;R Study | JASP Verificiation Project" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Verification of JASP" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Regression | JASP Verificiation Project" />
+  <meta name="twitter:title" content="Chapter 10 Type 2 &amp; 3 Gauge r&amp;R Study | JASP Verificiation Project" />
   
   <meta name="twitter:description" content="Verification of JASP" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="mixed-models.html"/>
-<link rel="next" href="frequencies.html"/>
+<link rel="prev" href="reliability-module.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -479,1286 +479,1373 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="regression" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Regression<a href="regression.html#regression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="correlation" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Correlation<a href="regression.html#correlation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>An example from Hays (1974, pp. 633-635):</p>
-<p>“The teacher collected data for a class of 91 students, obtaining for each a score <em>X</em>, based on the number of courses in high-school mathematics, and a score <em>Y</em>, the actual score on the final examination for the course.”</p>
+<div id="type-2-3-gauge-rr-study" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Type 2 &amp; 3 Gauge r&amp;R Study<a href="type-2-3-gauge-rr-study.html#type-2-3-gauge-rr-study" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="GRR" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Type 2 Gauge r&amp;R Study<a href="type-2-3-gauge-rr-study.html#GRR" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The example data are taken from Houf &amp; Berman (1988) and concern the thermal impedance of <span class="math inline">\(10\)</span> different power modules (in <span class="math inline">\(^\circ\)</span>C per <span class="math inline">\(\text{Watt} \times 100\)</span>) as measured by <span class="math inline">\(3\)</span> different operators. Each operator measured each part <span class="math inline">\(3\)</span> times:</p>
 <table>
-<caption><span id="tab:unnamed-chunk-84">Table 6.1: </span>Data for Correlation</caption>
+<caption><span id="tab:unnamed-chunk-131">Table 10.1: </span>Example Data from Houf &amp; Berman (1988)</caption>
 <thead>
 <tr class="header">
-<th align="right">X</th>
-<th align="right">Y</th>
+<th align="left">Part</th>
+<th align="left">Operator</th>
+<th align="right">Measurement</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">2.0</td>
-<td align="right">22</td>
+<td align="left">1</td>
+<td align="left">A</td>
+<td align="right">37</td>
 </tr>
 <tr class="even">
-<td align="right">2.0</td>
-<td align="right">17</td>
-</tr>
-<tr class="odd">
-<td align="right">2.0</td>
-<td align="right">16</td>
-</tr>
-<tr class="even">
-<td align="right">2.0</td>
-<td align="right">14</td>
-</tr>
-<tr class="odd">
-<td align="right">2.0</td>
-<td align="right">10</td>
-</tr>
-<tr class="even">
-<td align="right">2.0</td>
-<td align="right">9</td>
-</tr>
-<tr class="odd">
-<td align="right">2.0</td>
-<td align="right">7</td>
-</tr>
-<tr class="even">
-<td align="right">2.0</td>
-<td align="right">5</td>
-</tr>
-<tr class="odd">
-<td align="right">2.0</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="right">2.0</td>
-<td align="right">2</td>
-</tr>
-<tr class="odd">
-<td align="right">2.5</td>
-<td align="right">26</td>
-</tr>
-<tr class="even">
-<td align="right">2.5</td>
-<td align="right">23</td>
-</tr>
-<tr class="odd">
-<td align="right">2.5</td>
-<td align="right">18</td>
-</tr>
-<tr class="even">
-<td align="right">2.5</td>
-<td align="right">18</td>
-</tr>
-<tr class="odd">
-<td align="right">2.5</td>
-<td align="right">16</td>
-</tr>
-<tr class="even">
-<td align="right">2.5</td>
-<td align="right">13</td>
-</tr>
-<tr class="odd">
-<td align="right">2.5</td>
-<td align="right">12</td>
-</tr>
-<tr class="even">
-<td align="right">2.5</td>
-<td align="right">10</td>
-</tr>
-<tr class="odd">
-<td align="right">2.5</td>
-<td align="right">10</td>
-</tr>
-<tr class="even">
-<td align="right">2.5</td>
-<td align="right">7</td>
-</tr>
-<tr class="odd">
-<td align="right">2.5</td>
-<td align="right">6</td>
-</tr>
-<tr class="even">
-<td align="right">3.0</td>
-<td align="right">29</td>
-</tr>
-<tr class="odd">
-<td align="right">3.0</td>
-<td align="right">26</td>
-</tr>
-<tr class="even">
-<td align="right">3.0</td>
-<td align="right">26</td>
-</tr>
-<tr class="odd">
-<td align="right">3.0</td>
-<td align="right">24</td>
-</tr>
-<tr class="even">
-<td align="right">3.0</td>
-<td align="right">24</td>
-</tr>
-<tr class="odd">
-<td align="right">3.0</td>
-<td align="right">23</td>
-</tr>
-<tr class="even">
-<td align="right">3.0</td>
-<td align="right">22</td>
-</tr>
-<tr class="odd">
-<td align="right">3.0</td>
-<td align="right">16</td>
-</tr>
-<tr class="even">
-<td align="right">3.0</td>
-<td align="right">9</td>
-</tr>
-<tr class="odd">
-<td align="right">3.0</td>
-<td align="right">8</td>
-</tr>
-<tr class="even">
-<td align="right">3.5</td>
-<td align="right">34</td>
-</tr>
-<tr class="odd">
-<td align="right">3.5</td>
-<td align="right">26</td>
-</tr>
-<tr class="even">
-<td align="right">3.5</td>
-<td align="right">25</td>
-</tr>
-<tr class="odd">
-<td align="right">3.5</td>
-<td align="right">23</td>
-</tr>
-<tr class="even">
-<td align="right">3.5</td>
-<td align="right">23</td>
-</tr>
-<tr class="odd">
-<td align="right">3.5</td>
-<td align="right">22</td>
-</tr>
-<tr class="even">
-<td align="right">3.5</td>
-<td align="right">22</td>
-</tr>
-<tr class="odd">
-<td align="right">3.5</td>
-<td align="right">19</td>
-</tr>
-<tr class="even">
-<td align="right">3.5</td>
-<td align="right">18</td>
-</tr>
-<tr class="odd">
-<td align="right">3.5</td>
-<td align="right">17</td>
-</tr>
-<tr class="even">
-<td align="right">3.5</td>
-<td align="right">17</td>
-</tr>
-<tr class="odd">
-<td align="right">3.5</td>
-<td align="right">17</td>
-</tr>
-<tr class="even">
-<td align="right">3.5</td>
-<td align="right">12</td>
-</tr>
-<tr class="odd">
-<td align="right">3.5</td>
-<td align="right">8</td>
-</tr>
-<tr class="even">
-<td align="right">4.0</td>
-<td align="right">36</td>
-</tr>
-<tr class="odd">
-<td align="right">4.0</td>
-<td align="right">35</td>
-</tr>
-<tr class="even">
-<td align="right">4.0</td>
-<td align="right">30</td>
-</tr>
-<tr class="odd">
-<td align="right">4.0</td>
-<td align="right">27</td>
-</tr>
-<tr class="even">
-<td align="right">4.0</td>
-<td align="right">25</td>
-</tr>
-<tr class="odd">
-<td align="right">4.0</td>
-<td align="right">25</td>
-</tr>
-<tr class="even">
-<td align="right">4.0</td>
-<td align="right">24</td>
-</tr>
-<tr class="odd">
-<td align="right">4.0</td>
-<td align="right">21</td>
-</tr>
-<tr class="even">
-<td align="right">4.0</td>
-<td align="right">20</td>
-</tr>
-<tr class="odd">
-<td align="right">4.0</td>
-<td align="right">19</td>
-</tr>
-<tr class="even">
-<td align="right">4.0</td>
-<td align="right">19</td>
-</tr>
-<tr class="odd">
-<td align="right">4.0</td>
-<td align="right">18</td>
-</tr>
-<tr class="even">
-<td align="right">4.0</td>
-<td align="right">18</td>
-</tr>
-<tr class="odd">
-<td align="right">4.0</td>
-<td align="right">12</td>
-</tr>
-<tr class="even">
-<td align="right">4.0</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="right">4.5</td>
-<td align="right">28</td>
-</tr>
-<tr class="even">
-<td align="right">4.5</td>
-<td align="right">27</td>
-</tr>
-<tr class="odd">
-<td align="right">4.5</td>
-<td align="right">16</td>
-</tr>
-<tr class="even">
-<td align="right">5.0</td>
-<td align="right">41</td>
-</tr>
-<tr class="odd">
-<td align="right">5.0</td>
-<td align="right">32</td>
-</tr>
-<tr class="even">
-<td align="right">5.0</td>
-<td align="right">27</td>
-</tr>
-<tr class="odd">
-<td align="right">5.0</td>
-<td align="right">19</td>
-</tr>
-<tr class="even">
-<td align="right">5.5</td>
-<td align="right">32</td>
-</tr>
-<tr class="odd">
-<td align="right">5.5</td>
-<td align="right">25</td>
-</tr>
-<tr class="even">
-<td align="right">5.5</td>
-<td align="right">25</td>
-</tr>
-<tr class="odd">
-<td align="right">6.0</td>
-<td align="right">46</td>
-</tr>
-<tr class="even">
-<td align="right">6.0</td>
+<td align="left">1</td>
+<td align="left">A</td>
 <td align="right">38</td>
 </tr>
 <tr class="odd">
-<td align="right">6.0</td>
-<td align="right">34</td>
-</tr>
-<tr class="even">
-<td align="right">6.0</td>
-<td align="right">33</td>
-</tr>
-<tr class="odd">
-<td align="right">6.0</td>
-<td align="right">27</td>
-</tr>
-<tr class="even">
-<td align="right">6.0</td>
-<td align="right">20</td>
-</tr>
-<tr class="odd">
-<td align="right">6.5</td>
-<td align="right">44</td>
-</tr>
-<tr class="even">
-<td align="right">6.5</td>
-<td align="right">37</td>
-</tr>
-<tr class="odd">
-<td align="right">6.5</td>
-<td align="right">32</td>
-</tr>
-<tr class="even">
-<td align="right">6.5</td>
-<td align="right">28</td>
-</tr>
-<tr class="odd">
-<td align="right">7.0</td>
-<td align="right">52</td>
-</tr>
-<tr class="even">
-<td align="right">7.0</td>
-<td align="right">46</td>
-</tr>
-<tr class="odd">
-<td align="right">7.0</td>
+<td align="left">1</td>
+<td align="left">A</td>
 <td align="right">37</td>
 </tr>
 <tr class="even">
-<td align="right">7.5</td>
+<td align="left">1</td>
+<td align="left">B</td>
+<td align="right">41</td>
+</tr>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">B</td>
+<td align="right">41</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">B</td>
+<td align="right">40</td>
+</tr>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">C</td>
+<td align="right">41</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">C</td>
 <td align="right">42</td>
 </tr>
 <tr class="odd">
-<td align="right">7.5</td>
+<td align="left">1</td>
+<td align="left">C</td>
 <td align="right">41</td>
 </tr>
 <tr class="even">
-<td align="right">7.5</td>
-<td align="right">38</td>
-</tr>
-<tr class="odd">
-<td align="right">7.5</td>
-<td align="right">35</td>
-</tr>
-<tr class="even">
-<td align="right">8.0</td>
-<td align="right">53</td>
-</tr>
-<tr class="odd">
-<td align="right">8.0</td>
-<td align="right">48</td>
-</tr>
-<tr class="even">
-<td align="right">8.0</td>
-<td align="right">40</td>
-</tr>
-<tr class="odd">
-<td align="right">8.0</td>
-<td align="right">40</td>
-</tr>
-</tbody>
-</table>
-<div id="ResultsCorr" class="section level3 hasAnchor" number="6.1.1">
-<h3><span class="header-section-number">6.1.1</span> Results Overview<a href="regression.html#ResultsCorr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<table>
-<caption><span id="tab:unnamed-chunk-85">Table 6.2: </span>Result Overview Correlation</caption>
-<thead>
-<tr class="header">
-<th align="left"></th>
-<th align="right">By Hand</th>
-<th align="right">JASP</th>
-<th align="right">SPSS</th>
-<th align="right">SAS</th>
-<th align="right">Minitab</th>
-<th align="right">R</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Pearson</td>
-<td align="right">0.81</td>
-<td align="right">0.8064</td>
-<td align="right">0.806</td>
-<td align="right">0.8064</td>
-<td align="right">0.806</td>
-<td align="right">0.8064</td>
-</tr>
-<tr class="even">
-<td align="left">Spearman</td>
-<td align="right">NA</td>
-<td align="right">0.7730</td>
-<td align="right">0.773</td>
-<td align="right">0.7730</td>
-<td align="right">0.773</td>
-<td align="right">0.7730</td>
-</tr>
-<tr class="odd">
-<td align="left">Kendall</td>
-<td align="right">NA</td>
-<td align="right">0.6121</td>
-<td align="right">0.612</td>
-<td align="right">0.6120</td>
-<td align="right">NA</td>
-<td align="right">0.6120</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="ByHandCorr" class="section level3 hasAnchor" number="6.1.2">
-<h3><span class="header-section-number">6.1.2</span> By Hand<a href="regression.html#ByHandCorr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Calculations by hand can be found in Hays, 1974, pp. 633-635.</p>
-<p>Result: r = 0.81</p>
-<p><strong>Note:</strong> Hays calculated only the Pearson correlation coefficient.</p>
-</div>
-<div id="jaspCorr" class="section level3 hasAnchor" number="6.1.3">
-<h3><span class="header-section-number">6.1.3</span> JASP<a href="regression.html#jaspCorr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="figure"><span style="display:block;" id="fig:corrJASP"></span>
-<img src="Screenshots/Correlation/corrJASP.PNG" alt="\label{fig:corrJASP}JASP Output for Correlation"  />
-<p class="caption">
-Figure 6.1: JASP Output for Correlation
-</p>
-</div>
-</div>
-<div id="spssCorr" class="section level3 hasAnchor" number="6.1.4">
-<h3><span class="header-section-number">6.1.4</span> SPSS<a href="regression.html#spssCorr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="regression.html#cb85-1" tabindex="-1"></a>DATASET ACTIVATE DataSet1.</span>
-<span id="cb85-2"><a href="regression.html#cb85-2" tabindex="-1"></a>CORRELATIONS</span>
-<span id="cb85-3"><a href="regression.html#cb85-3" tabindex="-1"></a>  <span class="sc">/</span>VARIABLES<span class="ot">=</span>Y X</span>
-<span id="cb85-4"><a href="regression.html#cb85-4" tabindex="-1"></a>  <span class="sc">/</span>PRINT<span class="ot">=</span>TWOTAIL NOSIG</span>
-<span id="cb85-5"><a href="regression.html#cb85-5" tabindex="-1"></a>  <span class="sc">/</span>MISSING<span class="ot">=</span>PAIRWISE.</span>
-<span id="cb85-6"><a href="regression.html#cb85-6" tabindex="-1"></a>NONPAR CORR</span>
-<span id="cb85-7"><a href="regression.html#cb85-7" tabindex="-1"></a>  <span class="sc">/</span>VARIABLES<span class="ot">=</span>Y X</span>
-<span id="cb85-8"><a href="regression.html#cb85-8" tabindex="-1"></a>  <span class="sc">/</span>PRINT<span class="ot">=</span>BOTH TWOTAIL NOSIG</span>
-<span id="cb85-9"><a href="regression.html#cb85-9" tabindex="-1"></a>  <span class="sc">/</span>MISSING<span class="ot">=</span>PAIRWISE.</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:corrSPSS"></span>
-<img src="Screenshots/Correlation/corrSPSS.PNG" alt="\label{fig:corrSPSS}SPSS Output for Correlation"  />
-<p class="caption">
-Figure 6.2: SPSS Output for Correlation
-</p>
-</div>
-</div>
-<div id="sasCorr" class="section level3 hasAnchor" number="6.1.5">
-<h3><span class="header-section-number">6.1.5</span> SAS<a href="regression.html#sasCorr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="regression.html#cb86-1" tabindex="-1"></a>PROC CORR DATA<span class="ot">=</span>Correlation pearson spearman kendall;</span>
-<span id="cb86-2"><a href="regression.html#cb86-2" tabindex="-1"></a>    VAR X;</span>
-<span id="cb86-3"><a href="regression.html#cb86-3" tabindex="-1"></a>    WITH Y;</span>
-<span id="cb86-4"><a href="regression.html#cb86-4" tabindex="-1"></a>RUN;</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:corrSAS"></span>
-<img src="Screenshots/Correlation/corrSAS.PNG" alt="\label{fig:corrSAS}SAS Output for Correlation"  />
-<p class="caption">
-Figure 6.3: SAS Output for Correlation
-</p>
-</div>
-</div>
-<div id="minitabCorr" class="section level3 hasAnchor" number="6.1.6">
-<h3><span class="header-section-number">6.1.6</span> Minitab<a href="regression.html#minitabCorr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="figure"><span style="display:block;" id="fig:corrMinitab"></span>
-<img src="Screenshots/Correlation/corrMinitab.PNG" alt="\label{fig:corrMinitab}Minitab Output for Pearson Correlation"  />
-<p class="caption">
-Figure 6.4: Minitab Output for Pearson Correlation
-</p>
-</div>
-<div class="figure"><span style="display:block;" id="fig:corrMinitab2"></span>
-<img src="Screenshots/Correlation/corrMinitab2.PNG" alt="\label{fig:corrMinitab2}Minitab Output for Spearman Correlation"  />
-<p class="caption">
-Figure 6.5: Minitab Output for Spearman Correlation
-</p>
-</div>
-</div>
-<div id="rCorr" class="section level3 hasAnchor" number="6.1.7">
-<h3><span class="header-section-number">6.1.7</span> R<a href="regression.html#rCorr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="regression.html#cb87-1" tabindex="-1"></a><span class="fu">cor.test</span>(corr.data<span class="sc">$</span>X, corr.data<span class="sc">$</span>Y, <span class="at">method =</span><span class="st">&quot;pearson&quot;</span>)</span></code></pre></div>
-<pre><code>## 
-##  Pearson&#39;s product-moment correlation
-## 
-## data:  corr.data$X and corr.data$Y
-## t = 12.866, df = 89, p-value &lt; 2.2e-16
-## alternative hypothesis: true correlation is not equal to 0
-## 95 percent confidence interval:
-##  0.7200843 0.8681910
-## sample estimates:
-##       cor 
-## 0.8064365</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="regression.html#cb89-1" tabindex="-1"></a><span class="fu">cor.test</span>(corr.data<span class="sc">$</span>X, corr.data<span class="sc">$</span>Y, <span class="at">method =</span><span class="st">&quot;spearman&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning in cor.test.default(corr.data$X, corr.data$Y, method = &quot;spearman&quot;):
-## Cannot compute exact p-value with ties</code></pre>
-<pre><code>## 
-##  Spearman&#39;s rank correlation rho
-## 
-## data:  corr.data$X and corr.data$Y
-## S = 28502, p-value &lt; 2.2e-16
-## alternative hypothesis: true rho is not equal to 0
-## sample estimates:
-##       rho 
-## 0.7730333</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="regression.html#cb92-1" tabindex="-1"></a><span class="fu">cor.test</span>(corr.data<span class="sc">$</span>X, corr.data<span class="sc">$</span>Y, <span class="at">method =</span><span class="st">&quot;kendall&quot;</span>)</span></code></pre></div>
-<pre><code>## 
-##  Kendall&#39;s rank correlation tau
-## 
-## data:  corr.data$X and corr.data$Y
-## z = 8.1519, p-value = 3.582e-16
-## alternative hypothesis: true tau is not equal to 0
-## sample estimates:
-##       tau 
-## 0.6120845</code></pre>
-</div>
-<div id="remarksCorr" class="section level3 hasAnchor" number="6.1.8">
-<h3><span class="header-section-number">6.1.8</span> Remarks<a href="regression.html#remarksCorr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>All differences in results between the software and hand calculation are due to rounding.</p>
-</div>
-<div id="refCorr" class="section level3 hasAnchor" number="6.1.9">
-<h3><span class="header-section-number">6.1.9</span> References<a href="regression.html#refCorr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Hays, W. L. (1974). <em>Statistics for the social sciences (2nd Ed.)</em>. New York, US: Holt, Rinehart and Winston, Inc.</p>
-</div>
-</div>
-<div id="linear-regression" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Linear Regression<a href="regression.html#linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>An example from Hays (1974, pp. 633-635):</p>
-<p>“The teacher collected data for a class of 91 students, obtaining for each a score <em>X</em>, based on the number of courses in high-school mathematics, and a score <em>Y</em>, the actual score on the final examination for the course.”</p>
-<table>
-<caption><span id="tab:unnamed-chunk-89">Table 6.3: </span>Data for Regression</caption>
-<thead>
-<tr class="header">
-<th align="right">X</th>
-<th align="right">Y</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">2.0</td>
-<td align="right">22</td>
-</tr>
-<tr class="even">
-<td align="right">2.0</td>
-<td align="right">17</td>
-</tr>
-<tr class="odd">
-<td align="right">2.0</td>
-<td align="right">16</td>
-</tr>
-<tr class="even">
-<td align="right">2.0</td>
-<td align="right">14</td>
-</tr>
-<tr class="odd">
-<td align="right">2.0</td>
-<td align="right">10</td>
-</tr>
-<tr class="even">
-<td align="right">2.0</td>
-<td align="right">9</td>
-</tr>
-<tr class="odd">
-<td align="right">2.0</td>
-<td align="right">7</td>
-</tr>
-<tr class="even">
-<td align="right">2.0</td>
-<td align="right">5</td>
-</tr>
-<tr class="odd">
-<td align="right">2.0</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="right">2.0</td>
-<td align="right">2</td>
-</tr>
-<tr class="odd">
-<td align="right">2.5</td>
-<td align="right">26</td>
-</tr>
-<tr class="even">
-<td align="right">2.5</td>
-<td align="right">23</td>
-</tr>
-<tr class="odd">
-<td align="right">2.5</td>
-<td align="right">18</td>
-</tr>
-<tr class="even">
-<td align="right">2.5</td>
-<td align="right">18</td>
-</tr>
-<tr class="odd">
-<td align="right">2.5</td>
-<td align="right">16</td>
-</tr>
-<tr class="even">
-<td align="right">2.5</td>
-<td align="right">13</td>
-</tr>
-<tr class="odd">
-<td align="right">2.5</td>
-<td align="right">12</td>
-</tr>
-<tr class="even">
-<td align="right">2.5</td>
-<td align="right">10</td>
-</tr>
-<tr class="odd">
-<td align="right">2.5</td>
-<td align="right">10</td>
-</tr>
-<tr class="even">
-<td align="right">2.5</td>
-<td align="right">7</td>
-</tr>
-<tr class="odd">
-<td align="right">2.5</td>
-<td align="right">6</td>
-</tr>
-<tr class="even">
-<td align="right">3.0</td>
-<td align="right">29</td>
-</tr>
-<tr class="odd">
-<td align="right">3.0</td>
-<td align="right">26</td>
-</tr>
-<tr class="even">
-<td align="right">3.0</td>
-<td align="right">26</td>
-</tr>
-<tr class="odd">
-<td align="right">3.0</td>
-<td align="right">24</td>
-</tr>
-<tr class="even">
-<td align="right">3.0</td>
-<td align="right">24</td>
-</tr>
-<tr class="odd">
-<td align="right">3.0</td>
-<td align="right">23</td>
-</tr>
-<tr class="even">
-<td align="right">3.0</td>
-<td align="right">22</td>
-</tr>
-<tr class="odd">
-<td align="right">3.0</td>
-<td align="right">16</td>
-</tr>
-<tr class="even">
-<td align="right">3.0</td>
-<td align="right">9</td>
-</tr>
-<tr class="odd">
-<td align="right">3.0</td>
-<td align="right">8</td>
-</tr>
-<tr class="even">
-<td align="right">3.5</td>
-<td align="right">34</td>
-</tr>
-<tr class="odd">
-<td align="right">3.5</td>
-<td align="right">26</td>
-</tr>
-<tr class="even">
-<td align="right">3.5</td>
-<td align="right">25</td>
-</tr>
-<tr class="odd">
-<td align="right">3.5</td>
-<td align="right">23</td>
-</tr>
-<tr class="even">
-<td align="right">3.5</td>
-<td align="right">23</td>
-</tr>
-<tr class="odd">
-<td align="right">3.5</td>
-<td align="right">22</td>
-</tr>
-<tr class="even">
-<td align="right">3.5</td>
-<td align="right">22</td>
-</tr>
-<tr class="odd">
-<td align="right">3.5</td>
-<td align="right">19</td>
-</tr>
-<tr class="even">
-<td align="right">3.5</td>
-<td align="right">18</td>
-</tr>
-<tr class="odd">
-<td align="right">3.5</td>
-<td align="right">17</td>
-</tr>
-<tr class="even">
-<td align="right">3.5</td>
-<td align="right">17</td>
-</tr>
-<tr class="odd">
-<td align="right">3.5</td>
-<td align="right">17</td>
-</tr>
-<tr class="even">
-<td align="right">3.5</td>
-<td align="right">12</td>
-</tr>
-<tr class="odd">
-<td align="right">3.5</td>
-<td align="right">8</td>
-</tr>
-<tr class="even">
-<td align="right">4.0</td>
-<td align="right">36</td>
-</tr>
-<tr class="odd">
-<td align="right">4.0</td>
-<td align="right">35</td>
-</tr>
-<tr class="even">
-<td align="right">4.0</td>
-<td align="right">30</td>
-</tr>
-<tr class="odd">
-<td align="right">4.0</td>
-<td align="right">27</td>
-</tr>
-<tr class="even">
-<td align="right">4.0</td>
-<td align="right">25</td>
-</tr>
-<tr class="odd">
-<td align="right">4.0</td>
-<td align="right">25</td>
-</tr>
-<tr class="even">
-<td align="right">4.0</td>
-<td align="right">24</td>
-</tr>
-<tr class="odd">
-<td align="right">4.0</td>
-<td align="right">21</td>
-</tr>
-<tr class="even">
-<td align="right">4.0</td>
-<td align="right">20</td>
-</tr>
-<tr class="odd">
-<td align="right">4.0</td>
-<td align="right">19</td>
-</tr>
-<tr class="even">
-<td align="right">4.0</td>
-<td align="right">19</td>
-</tr>
-<tr class="odd">
-<td align="right">4.0</td>
-<td align="right">18</td>
-</tr>
-<tr class="even">
-<td align="right">4.0</td>
-<td align="right">18</td>
-</tr>
-<tr class="odd">
-<td align="right">4.0</td>
-<td align="right">12</td>
-</tr>
-<tr class="even">
-<td align="right">4.0</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="right">4.5</td>
-<td align="right">28</td>
-</tr>
-<tr class="even">
-<td align="right">4.5</td>
-<td align="right">27</td>
-</tr>
-<tr class="odd">
-<td align="right">4.5</td>
-<td align="right">16</td>
-</tr>
-<tr class="even">
-<td align="right">5.0</td>
-<td align="right">41</td>
-</tr>
-<tr class="odd">
-<td align="right">5.0</td>
-<td align="right">32</td>
-</tr>
-<tr class="even">
-<td align="right">5.0</td>
-<td align="right">27</td>
-</tr>
-<tr class="odd">
-<td align="right">5.0</td>
-<td align="right">19</td>
-</tr>
-<tr class="even">
-<td align="right">5.5</td>
-<td align="right">32</td>
-</tr>
-<tr class="odd">
-<td align="right">5.5</td>
-<td align="right">25</td>
-</tr>
-<tr class="even">
-<td align="right">5.5</td>
-<td align="right">25</td>
-</tr>
-<tr class="odd">
-<td align="right">6.0</td>
-<td align="right">46</td>
-</tr>
-<tr class="even">
-<td align="right">6.0</td>
-<td align="right">38</td>
-</tr>
-<tr class="odd">
-<td align="right">6.0</td>
-<td align="right">34</td>
-</tr>
-<tr class="even">
-<td align="right">6.0</td>
-<td align="right">33</td>
-</tr>
-<tr class="odd">
-<td align="right">6.0</td>
-<td align="right">27</td>
-</tr>
-<tr class="even">
-<td align="right">6.0</td>
-<td align="right">20</td>
-</tr>
-<tr class="odd">
-<td align="right">6.5</td>
-<td align="right">44</td>
-</tr>
-<tr class="even">
-<td align="right">6.5</td>
-<td align="right">37</td>
-</tr>
-<tr class="odd">
-<td align="right">6.5</td>
-<td align="right">32</td>
-</tr>
-<tr class="even">
-<td align="right">6.5</td>
-<td align="right">28</td>
-</tr>
-<tr class="odd">
-<td align="right">7.0</td>
-<td align="right">52</td>
-</tr>
-<tr class="even">
-<td align="right">7.0</td>
-<td align="right">46</td>
-</tr>
-<tr class="odd">
-<td align="right">7.0</td>
-<td align="right">37</td>
-</tr>
-<tr class="even">
-<td align="right">7.5</td>
+<td align="left">2</td>
+<td align="left">A</td>
 <td align="right">42</td>
 </tr>
 <tr class="odd">
-<td align="right">7.5</td>
+<td align="left">2</td>
+<td align="left">A</td>
 <td align="right">41</td>
 </tr>
 <tr class="even">
-<td align="right">7.5</td>
-<td align="right">38</td>
+<td align="left">2</td>
+<td align="left">A</td>
+<td align="right">43</td>
 </tr>
 <tr class="odd">
-<td align="right">7.5</td>
+<td align="left">2</td>
+<td align="left">B</td>
+<td align="right">42</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">B</td>
+<td align="right">42</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">B</td>
+<td align="right">42</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">C</td>
+<td align="right">43</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">C</td>
+<td align="right">42</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">C</td>
+<td align="right">43</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">A</td>
+<td align="right">30</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">A</td>
+<td align="right">31</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">A</td>
+<td align="right">31</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">B</td>
+<td align="right">31</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">B</td>
+<td align="right">31</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">B</td>
+<td align="right">31</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">C</td>
+<td align="right">29</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">C</td>
+<td align="right">30</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">C</td>
+<td align="right">28</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">A</td>
+<td align="right">42</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">A</td>
+<td align="right">43</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">A</td>
+<td align="right">42</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">B</td>
+<td align="right">43</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">B</td>
+<td align="right">43</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">B</td>
+<td align="right">43</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">C</td>
+<td align="right">42</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">C</td>
+<td align="right">42</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">C</td>
+<td align="right">42</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">A</td>
+<td align="right">28</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">A</td>
+<td align="right">30</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">A</td>
+<td align="right">29</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">B</td>
+<td align="right">29</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">B</td>
+<td align="right">30</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">B</td>
+<td align="right">29</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">C</td>
+<td align="right">31</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">C</td>
+<td align="right">29</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">C</td>
+<td align="right">29</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">A</td>
+<td align="right">42</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="left">A</td>
+<td align="right">42</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">A</td>
+<td align="right">43</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="left">B</td>
+<td align="right">45</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">B</td>
+<td align="right">45</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="left">B</td>
+<td align="right">45</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">C</td>
+<td align="right">44</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="left">C</td>
+<td align="right">46</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">C</td>
+<td align="right">45</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">A</td>
+<td align="right">25</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="left">A</td>
+<td align="right">26</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">A</td>
+<td align="right">27</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="left">B</td>
+<td align="right">28</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">B</td>
+<td align="right">28</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="left">B</td>
+<td align="right">30</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">C</td>
+<td align="right">29</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="left">C</td>
+<td align="right">27</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">C</td>
+<td align="right">27</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">A</td>
+<td align="right">40</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="left">A</td>
+<td align="right">40</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">A</td>
+<td align="right">40</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="left">B</td>
+<td align="right">43</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">B</td>
+<td align="right">42</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="left">B</td>
+<td align="right">42</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">C</td>
+<td align="right">43</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="left">C</td>
+<td align="right">43</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">C</td>
+<td align="right">41</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">A</td>
+<td align="right">25</td>
+</tr>
+<tr class="even">
+<td align="left">9</td>
+<td align="left">A</td>
+<td align="right">25</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">A</td>
+<td align="right">25</td>
+</tr>
+<tr class="even">
+<td align="left">9</td>
+<td align="left">B</td>
+<td align="right">27</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">B</td>
+<td align="right">29</td>
+</tr>
+<tr class="even">
+<td align="left">9</td>
+<td align="left">B</td>
+<td align="right">28</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">C</td>
+<td align="right">26</td>
+</tr>
+<tr class="even">
+<td align="left">9</td>
+<td align="left">C</td>
+<td align="right">26</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">C</td>
+<td align="right">26</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">A</td>
+<td align="right">35</td>
+</tr>
+<tr class="odd">
+<td align="left">10</td>
+<td align="left">A</td>
+<td align="right">34</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">A</td>
+<td align="right">34</td>
+</tr>
+<tr class="odd">
+<td align="left">10</td>
+<td align="left">B</td>
 <td align="right">35</td>
 </tr>
 <tr class="even">
-<td align="right">8.0</td>
-<td align="right">53</td>
+<td align="left">10</td>
+<td align="left">B</td>
+<td align="right">35</td>
 </tr>
 <tr class="odd">
-<td align="right">8.0</td>
-<td align="right">48</td>
+<td align="left">10</td>
+<td align="left">B</td>
+<td align="right">34</td>
 </tr>
 <tr class="even">
-<td align="right">8.0</td>
-<td align="right">40</td>
+<td align="left">10</td>
+<td align="left">C</td>
+<td align="right">35</td>
 </tr>
 <tr class="odd">
-<td align="right">8.0</td>
-<td align="right">40</td>
+<td align="left">10</td>
+<td align="left">C</td>
+<td align="right">34</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">C</td>
+<td align="right">35</td>
 </tr>
 </tbody>
 </table>
-<div id="ResultsReg" class="section level3 hasAnchor" number="6.2.1">
-<h3><span class="header-section-number">6.2.1</span> Results Overview<a href="regression.html#ResultsReg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="ResultsGRR" class="section level3 hasAnchor" number="10.1.1">
+<h3><span class="header-section-number">10.1.1</span> Results Overview<a href="type-2-3-gauge-rr-study.html#ResultsGRR" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="variance-components" class="section level4 hasAnchor" number="10.1.1.1">
+<h4><span class="header-section-number">10.1.1.1</span> Variance Components<a href="type-2-3-gauge-rr-study.html#variance-components" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <table>
-<caption><span id="tab:unnamed-chunk-90">Table 6.4: </span>Result Overview Independent Factorial ANOVA</caption>
-<colgroup>
-<col width="32%" />
-<col width="11%" />
-<col width="11%" />
-<col width="10%" />
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
-</colgroup>
+<caption><span id="tab:unnamed-chunk-132">Table 10.2: </span>Results Overview Variance Components</caption>
 <thead>
 <tr class="header">
 <th align="left"></th>
+<th align="right">JASP</th>
 <th align="right">By Hand</th>
-<th align="right">JASP</th>
-<th align="right">SPSS</th>
-<th align="right">SAS</th>
+<th align="right">JMP</th>
 <th align="right">Minitab</th>
 <th align="right">R</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Constant</td>
-<td align="right">23.84</td>
-<td align="right">23.8352</td>
-<td align="right">23.835</td>
-<td align="right">23.8352</td>
-<td align="right">23.835</td>
-<td align="right">23.8350</td>
+<td align="left">Total Gage R&amp;R</td>
+<td align="right">1.804</td>
+<td align="right">1.804</td>
+<td align="right">1.804</td>
+<td align="right">1.804</td>
+<td align="right">1.804</td>
 </tr>
 <tr class="even">
-<td align="left">Regression Coefficient</td>
-<td align="right">5.42</td>
-<td align="right">5.3993</td>
-<td align="right">5.399</td>
-<td align="right">5.3993</td>
-<td align="right">5.399</td>
-<td align="right">5.3990</td>
+<td align="left">Repeatability</td>
+<td align="right">0.511</td>
+<td align="right">0.511</td>
+<td align="right">0.511</td>
+<td align="right">0.511</td>
+<td align="right">0.511</td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math inline">\(\overline{x}\)</span></td>
-<td align="right">4.19</td>
-<td align="right">4.1923</td>
-<td align="right">4.192</td>
-<td align="right">4.1923</td>
-<td align="right">4.192</td>
-<td align="right">4.1923</td>
+<td align="left">Reproducibility</td>
+<td align="right">1.293</td>
+<td align="right">1.293</td>
+<td align="right">1.293</td>
+<td align="right">1.293</td>
+<td align="right">1.293</td>
+</tr>
+<tr class="even">
+<td align="left">Operator</td>
+<td align="right">0.565</td>
+<td align="right">0.565</td>
+<td align="right">0.565</td>
+<td align="right">0.565</td>
+<td align="right">0.565</td>
+</tr>
+<tr class="odd">
+<td align="left">Part:Operator</td>
+<td align="right">0.728</td>
+<td align="right">0.728</td>
+<td align="right">0.728</td>
+<td align="right">0.728</td>
+<td align="right">0.728</td>
+</tr>
+<tr class="even">
+<td align="left">Part-To-Part</td>
+<td align="right">48.293</td>
+<td align="right">48.293</td>
+<td align="right">48.293</td>
+<td align="right">48.293</td>
+<td align="right">48.293</td>
+</tr>
+<tr class="odd">
+<td align="left">Total Variation</td>
+<td align="right">50.096</td>
+<td align="right">50.096</td>
+<td align="right">50.096</td>
+<td align="right">50.096</td>
+<td align="right">50.096</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="ByHandReg" class="section level3 hasAnchor" number="6.2.2">
-<h3><span class="header-section-number">6.2.2</span> By Hand<a href="regression.html#ByHandReg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Calculations by hand can be found in Hays, 1974, pp. 633-635.</p>
-<p>Results:</p>
-<p>y’ = (5.42)(x - 4.19) + 23.84</p>
-<p><strong>Note:</strong> Hays mean-centered the equation by the mean of <span class="math inline">\(\overline{x}\)</span> = 4.19.</p>
-</div>
-<div id="jaspReg" class="section level3 hasAnchor" number="6.2.3">
-<h3><span class="header-section-number">6.2.3</span> JASP<a href="regression.html#jaspReg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="figure"><span style="display:block;" id="fig:RegressionJASP"></span>
-<img src="Screenshots/Regression/RegressionJASP.PNG" alt="\label{fig:RegressionJASP}JASP Output for Regression"  />
-<p class="caption">
-Figure 6.6: JASP Output for Regression
-</p>
-</div>
-<div class="figure"><span style="display:block;" id="fig:RegressionJASPmeans"></span>
-<img src="Screenshots/Regression/RegressionJASPmeans.PNG" alt="\label{fig:RegressionJASPmeans}JASP Output for Descriptives"  />
-<p class="caption">
-Figure 6.7: JASP Output for Descriptives
-</p>
-</div>
-<p><strong>Mean-centered regression equation:</strong></p>
-<p>y’ = (5.3993)(x - 4.1923) + 23.8352</p>
-</div>
-<div id="spssReg" class="section level3 hasAnchor" number="6.2.4">
-<h3><span class="header-section-number">6.2.4</span> SPSS<a href="regression.html#spssReg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="regression.html#cb94-1" tabindex="-1"></a>DESCRIPTIVES VARIABLES<span class="ot">=</span>X</span>
-<span id="cb94-2"><a href="regression.html#cb94-2" tabindex="-1"></a>  <span class="sc">/</span>STATISTICS<span class="ot">=</span>MEAN.</span>
-<span id="cb94-3"><a href="regression.html#cb94-3" tabindex="-1"></a></span>
-<span id="cb94-4"><a href="regression.html#cb94-4" tabindex="-1"></a></span>
-<span id="cb94-5"><a href="regression.html#cb94-5" tabindex="-1"></a>REGRESSION</span>
-<span id="cb94-6"><a href="regression.html#cb94-6" tabindex="-1"></a>  <span class="sc">/</span>DESCRIPTIVES MEAN STDDEV CORR SIG N</span>
-<span id="cb94-7"><a href="regression.html#cb94-7" tabindex="-1"></a>  <span class="sc">/</span>MISSING LISTWISE</span>
-<span id="cb94-8"><a href="regression.html#cb94-8" tabindex="-1"></a>  <span class="sc">/</span>STATISTICS COEFF OUTS R ANOVA</span>
-<span id="cb94-9"><a href="regression.html#cb94-9" tabindex="-1"></a>  <span class="sc">/</span>CRITERIA<span class="ot">=</span><span class="fu">PIN</span>(.<span class="dv">05</span>) <span class="fu">POUT</span>(.<span class="dv">10</span>)</span>
-<span id="cb94-10"><a href="regression.html#cb94-10" tabindex="-1"></a>  <span class="sc">/</span>NOORIGIN </span>
-<span id="cb94-11"><a href="regression.html#cb94-11" tabindex="-1"></a>  <span class="sc">/</span>DEPENDENT Y</span>
-<span id="cb94-12"><a href="regression.html#cb94-12" tabindex="-1"></a>  <span class="sc">/</span>METHOD<span class="ot">=</span>ENTER MeanCenteredX.</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:RegressionSPSS"></span>
-<img src="Screenshots/Regression/RegressionSPSS.PNG" alt="\label{fig:RegressionSPSS}SPSS Output for Regression"  />
-<p class="caption">
-Figure 6.8: SPSS Output for Regression
-</p>
-</div>
-<p><strong>Mean-centered regression equation:</strong></p>
-<p>y’ = (5.399)(x - 4.192) + 23.835</p>
-</div>
-<div id="sasReg" class="section level3 hasAnchor" number="6.2.5">
-<h3><span class="header-section-number">6.2.5</span> SAS<a href="regression.html#sasReg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="regression.html#cb95-1" tabindex="-1"></a>proc Reg data<span class="ot">=</span>Regression;</span>
-<span id="cb95-2"><a href="regression.html#cb95-2" tabindex="-1"></a>title <span class="st">&quot;Linear regression&quot;</span>;</span>
-<span id="cb95-3"><a href="regression.html#cb95-3" tabindex="-1"></a>model Y <span class="ot">=</span> MeanCenteredX;</span>
-<span id="cb95-4"><a href="regression.html#cb95-4" tabindex="-1"></a>run;</span>
-<span id="cb95-5"><a href="regression.html#cb95-5" tabindex="-1"></a>    </span>
-<span id="cb95-6"><a href="regression.html#cb95-6" tabindex="-1"></a>PROC MEANS DATA<span class="ot">=</span>Regression;</span>
-<span id="cb95-7"><a href="regression.html#cb95-7" tabindex="-1"></a>  VAR X Y;</span>
-<span id="cb95-8"><a href="regression.html#cb95-8" tabindex="-1"></a>RUN;</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:RegressionSAS"></span>
-<img src="Screenshots/Regression/RegressionSAS.PNG" alt="\label{fig:RegressionSAS}SAS Output for Regression"  />
-<p class="caption">
-Figure 6.9: SAS Output for Regression
-</p>
-</div>
-<div class="figure"><span style="display:block;" id="fig:RegressionSASmeans"></span>
-<img src="Screenshots/Regression/RegressionSASmeans.PNG" alt="\label{fig:RegressionSASmeans}SAS Output for Means"  />
-<p class="caption">
-Figure 6.10: SAS Output for Means
-</p>
-</div>
-<p><strong>Mean-centered regression equation:</strong></p>
-<p>y’ = (5.3993)(x - 4.1923077) + 23.83516</p>
-</div>
-<div id="minitabReg" class="section level3 hasAnchor" number="6.2.6">
-<h3><span class="header-section-number">6.2.6</span> Minitab<a href="regression.html#minitabReg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="figure"><span style="display:block;" id="fig:RegressionMinitab"></span>
-<img src="Screenshots/Regression/RegressionMinitab.PNG" alt="\label{fig:RegressionMinitab}Minitab Output for Regression"  />
-<p class="caption">
-Figure 6.11: Minitab Output for Regression
-</p>
-</div>
-<div class="figure"><span style="display:block;" id="fig:RegressionMinitabmeans"></span>
-<img src="Screenshots/Regression/RegressionMinitabmeans.PNG" alt="\label{fig:RegressionMinitabmeans}Minitab Output for Means"  />
-<p class="caption">
-Figure 6.12: Minitab Output for Means
-</p>
-</div>
-<p><strong>Mean-centered regression equation:</strong></p>
-<p>y’ = (5.399)(x - 4.192) + 23.835</p>
-</div>
-<div id="rReg" class="section level3 hasAnchor" number="6.2.7">
-<h3><span class="header-section-number">6.2.7</span> R<a href="regression.html#rReg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="regression.html#cb96-1" tabindex="-1"></a>regress.data2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Datasets/Regression.csv&quot;</span>, <span class="at">sep=</span><span class="st">&quot;,&quot;</span>)</span>
-<span id="cb96-2"><a href="regression.html#cb96-2" tabindex="-1"></a><span class="fu">lm</span>(<span class="at">formula =</span> Y <span class="sc">~</span> MeanCenteredX, <span class="at">data =</span> regress.data2)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = Y ~ MeanCenteredX, data = regress.data2)
-## 
-## Coefficients:
-##   (Intercept)  MeanCenteredX  
-##        23.835          5.399</code></pre>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="regression.html#cb98-1" tabindex="-1"></a><span class="fu">mean</span>(regress.data2<span class="sc">$</span>X)</span></code></pre></div>
-<pre><code>## [1] 4.192308</code></pre>
-<p><strong>Mean-centered regression equation:</strong></p>
-<p>y’ = (5.399)(x - 4.192308) + 23.835</p>
-</div>
-<div id="remarksReg" class="section level3 hasAnchor" number="6.2.8">
-<h3><span class="header-section-number">6.2.8</span> Remarks<a href="regression.html#remarksReg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>All differences in results between the software and hand calculation are due to rounding.</p>
-</div>
-<div id="refReg" class="section level3 hasAnchor" number="6.2.9">
-<h3><span class="header-section-number">6.2.9</span> References<a href="regression.html#refReg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Hays, W. L. (1974). <em>Statistics for the social sciences (2nd Ed.)</em>. New York, US: Holt, Rinehart and Winston, Inc.</p>
-</div>
-</div>
-<div id="logistic-regression" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> Logistic Regression<a href="regression.html#logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>An example:</p>
-<p>The Titanic-dataset contains original data of all passengers of the Titanic. It contains their name, their passenger class (1st - 3rd), their age, their sex, and whether or not they survived the sinking of the ship. The logistic regression model is computed to allow predictions on a passengers survival status, based on their age, sex, and passenger class.</p>
-<div id="ResultsLogreg" class="section level3 hasAnchor" number="6.3.1">
-<h3><span class="header-section-number">6.3.1</span> Results Overview<a href="regression.html#ResultsLogreg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="contribution" class="section level4 hasAnchor" number="10.1.1.2">
+<h4><span class="header-section-number">10.1.1.2</span> % Contribution<a href="type-2-3-gauge-rr-study.html#contribution" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <table>
-<caption><span id="tab:unnamed-chunk-94">Table 6.5: </span>Result Overview Coefficents Logistic Regression</caption>
+<caption><span id="tab:unnamed-chunk-133">Table 10.3: </span>Results Overview % Contribution</caption>
 <thead>
 <tr class="header">
 <th align="left"></th>
 <th align="right">JASP</th>
-<th align="right">SPSS</th>
-<th align="right">SAS</th>
+<th align="right">By Hand</th>
+<th align="right">JMP</th>
 <th align="right">Minitab</th>
 <th align="right">R</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Constant</td>
-<td align="right">3.7597</td>
-<td align="right">3.760</td>
-<td align="right">3.7596</td>
-<td align="right">3.7600</td>
-<td align="right">3.7597</td>
+<td align="left">Total Gage R&amp;R</td>
+<td align="right">3.60</td>
+<td align="right">3.60</td>
+<td align="right">3.60</td>
+<td align="right">3.60</td>
+<td align="right">3.60</td>
 </tr>
 <tr class="even">
-<td align="left">Age</td>
-<td align="right">-0.0392</td>
-<td align="right">-0.039</td>
-<td align="right">-0.0392</td>
-<td align="right">-0.0392</td>
-<td align="right">-0.0392</td>
+<td align="left">Repeatability</td>
+<td align="right">1.02</td>
+<td align="right">1.02</td>
+<td align="right">1.02</td>
+<td align="right">1.02</td>
+<td align="right">1.02</td>
 </tr>
 <tr class="odd">
-<td align="left">2nd Class</td>
-<td align="right">-1.2920</td>
-<td align="right">-1.292</td>
-<td align="right">-1.2920</td>
-<td align="right">-1.2920</td>
-<td align="right">-1.2920</td>
+<td align="left">Reproducibility</td>
+<td align="right">2.58</td>
+<td align="right">2.58</td>
+<td align="right">2.58</td>
+<td align="right">2.58</td>
+<td align="right">2.58</td>
 </tr>
 <tr class="even">
-<td align="left">3rd Class</td>
-<td align="right">-2.5214</td>
-<td align="right">-2.521</td>
-<td align="right">-2.5214</td>
-<td align="right">-2.5210</td>
-<td align="right">-2.5214</td>
+<td align="left">Operator</td>
+<td align="right">1.13</td>
+<td align="right">1.13</td>
+<td align="right">1.13</td>
+<td align="right">1.13</td>
+<td align="right">1.13</td>
 </tr>
 <tr class="odd">
-<td align="left">Sex(Male)</td>
-<td align="right">-2.6314</td>
-<td align="right">-2.631</td>
-<td align="right">-2.6313</td>
-<td align="right">-2.6310</td>
-<td align="right">-2.6314</td>
+<td align="left">Part:Operator</td>
+<td align="right">1.45</td>
+<td align="right">1.45</td>
+<td align="right">1.45</td>
+<td align="right">1.45</td>
+<td align="right">1.45</td>
+</tr>
+<tr class="even">
+<td align="left">Part-To-Part</td>
+<td align="right">96.40</td>
+<td align="right">96.40</td>
+<td align="right">96.40</td>
+<td align="right">96.40</td>
+<td align="right">96.40</td>
+</tr>
+<tr class="odd">
+<td align="left">Total Variation</td>
+<td align="right">100.00</td>
+<td align="right">100.00</td>
+<td align="right">100.00</td>
+<td align="right">100.00</td>
+<td align="right">100.00</td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div id="jaspGRR" class="section level3 hasAnchor" number="10.1.2">
+<h3><span class="header-section-number">10.1.2</span> JASP<a href="type-2-3-gauge-rr-study.html#jaspGRR" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="figure"><span style="display:block;" id="fig:grrJASP"></span>
+<img src="Screenshots/Gauge%20R&R/grrJASP.png" alt="\label{fig:grrJASP}JASP Output for Type 2 Gauge r&amp;R Analysis"  />
+<p class="caption">
+Figure 10.1: JASP Output for Type 2 Gauge r&amp;R Analysis
+</p>
+</div>
+</div>
+<div id="byHandGRR" class="section level3 hasAnchor" number="10.1.3">
+<h3><span class="header-section-number">10.1.3</span> By Hand<a href="type-2-3-gauge-rr-study.html#byHandGRR" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="type-2-3-gauge-rr-study.html#cb149-1" tabindex="-1"></a><span class="co"># number of levels</span></span>
+<span id="cb149-2"><a href="type-2-3-gauge-rr-study.html#cb149-2" tabindex="-1"></a>o <span class="ot">&lt;-</span> <span class="fu">nlevels</span>(dat<span class="sc">$</span>Operator)</span>
+<span id="cb149-3"><a href="type-2-3-gauge-rr-study.html#cb149-3" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">nlevels</span>(dat<span class="sc">$</span>Part)</span>
+<span id="cb149-4"><a href="type-2-3-gauge-rr-study.html#cb149-4" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(dat<span class="sc">$</span>Measurement) <span class="sc">/</span> (o <span class="sc">*</span> p)</span>
+<span id="cb149-5"><a href="type-2-3-gauge-rr-study.html#cb149-5" tabindex="-1"></a></span>
+<span id="cb149-6"><a href="type-2-3-gauge-rr-study.html#cb149-6" tabindex="-1"></a><span class="co"># totals</span></span>
+<span id="cb149-7"><a href="type-2-3-gauge-rr-study.html#cb149-7" tabindex="-1"></a>grand_total <span class="ot">&lt;-</span> <span class="fu">sum</span>(dat<span class="sc">$</span>Measurement)</span>
+<span id="cb149-8"><a href="type-2-3-gauge-rr-study.html#cb149-8" tabindex="-1"></a>C <span class="ot">&lt;-</span> grand_total<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (o <span class="sc">*</span> p <span class="sc">*</span> n)</span>
+<span id="cb149-9"><a href="type-2-3-gauge-rr-study.html#cb149-9" tabindex="-1"></a></span>
+<span id="cb149-10"><a href="type-2-3-gauge-rr-study.html#cb149-10" tabindex="-1"></a>cell_totals <span class="ot">&lt;-</span> <span class="fu">with</span>(dat, <span class="fu">tapply</span>(Measurement, <span class="fu">list</span>(Operator, Part), sum))</span>
+<span id="cb149-11"><a href="type-2-3-gauge-rr-study.html#cb149-11" tabindex="-1"></a>row_totals  <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(cell_totals)</span>
+<span id="cb149-12"><a href="type-2-3-gauge-rr-study.html#cb149-12" tabindex="-1"></a>col_totals  <span class="ot">&lt;-</span> <span class="fu">colSums</span>(cell_totals)</span>
+<span id="cb149-13"><a href="type-2-3-gauge-rr-study.html#cb149-13" tabindex="-1"></a></span>
+<span id="cb149-14"><a href="type-2-3-gauge-rr-study.html#cb149-14" tabindex="-1"></a><span class="co"># SS total</span></span>
+<span id="cb149-15"><a href="type-2-3-gauge-rr-study.html#cb149-15" tabindex="-1"></a>SS_total <span class="ot">&lt;-</span> <span class="fu">sum</span>(dat<span class="sc">$</span>Measurement<span class="sc">^</span><span class="dv">2</span>) <span class="sc">-</span> C</span>
+<span id="cb149-16"><a href="type-2-3-gauge-rr-study.html#cb149-16" tabindex="-1"></a></span>
+<span id="cb149-17"><a href="type-2-3-gauge-rr-study.html#cb149-17" tabindex="-1"></a><span class="co"># SS O (Operator)</span></span>
+<span id="cb149-18"><a href="type-2-3-gauge-rr-study.html#cb149-18" tabindex="-1"></a>SS_O <span class="ot">&lt;-</span> <span class="fu">sum</span>(row_totals<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (p <span class="sc">*</span> n) <span class="sc">-</span> C</span>
+<span id="cb149-19"><a href="type-2-3-gauge-rr-study.html#cb149-19" tabindex="-1"></a></span>
+<span id="cb149-20"><a href="type-2-3-gauge-rr-study.html#cb149-20" tabindex="-1"></a><span class="co"># SS P (Part)</span></span>
+<span id="cb149-21"><a href="type-2-3-gauge-rr-study.html#cb149-21" tabindex="-1"></a>SS_P <span class="ot">&lt;-</span> <span class="fu">sum</span>(col_totals<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (o <span class="sc">*</span> n) <span class="sc">-</span> C</span>
+<span id="cb149-22"><a href="type-2-3-gauge-rr-study.html#cb149-22" tabindex="-1"></a></span>
+<span id="cb149-23"><a href="type-2-3-gauge-rr-study.html#cb149-23" tabindex="-1"></a><span class="co"># SS O×P</span></span>
+<span id="cb149-24"><a href="type-2-3-gauge-rr-study.html#cb149-24" tabindex="-1"></a>SS_OP <span class="ot">&lt;-</span> <span class="fu">sum</span>(cell_totals<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> n <span class="sc">-</span> SS_O <span class="sc">-</span> SS_P <span class="sc">-</span> C</span>
+<span id="cb149-25"><a href="type-2-3-gauge-rr-study.html#cb149-25" tabindex="-1"></a></span>
+<span id="cb149-26"><a href="type-2-3-gauge-rr-study.html#cb149-26" tabindex="-1"></a><span class="co"># SS error</span></span>
+<span id="cb149-27"><a href="type-2-3-gauge-rr-study.html#cb149-27" tabindex="-1"></a>cell_sumsq <span class="ot">&lt;-</span> <span class="fu">with</span>(dat, <span class="fu">tapply</span>(Measurement, <span class="fu">list</span>(Operator, Part), <span class="cf">function</span>(x) <span class="fu">sum</span>(x<span class="sc">^</span><span class="dv">2</span>)))</span>
+<span id="cb149-28"><a href="type-2-3-gauge-rr-study.html#cb149-28" tabindex="-1"></a>SS_E <span class="ot">&lt;-</span> <span class="fu">sum</span>(cell_sumsq <span class="sc">-</span> (cell_totals<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>n)</span>
+<span id="cb149-29"><a href="type-2-3-gauge-rr-study.html#cb149-29" tabindex="-1"></a></span>
+<span id="cb149-30"><a href="type-2-3-gauge-rr-study.html#cb149-30" tabindex="-1"></a><span class="co"># degrees of freedom</span></span>
+<span id="cb149-31"><a href="type-2-3-gauge-rr-study.html#cb149-31" tabindex="-1"></a>df_O <span class="ot">&lt;-</span> o <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb149-32"><a href="type-2-3-gauge-rr-study.html#cb149-32" tabindex="-1"></a>df_P <span class="ot">&lt;-</span> p <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb149-33"><a href="type-2-3-gauge-rr-study.html#cb149-33" tabindex="-1"></a>df_OP <span class="ot">&lt;-</span> (o <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> (p <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb149-34"><a href="type-2-3-gauge-rr-study.html#cb149-34" tabindex="-1"></a>df_E <span class="ot">&lt;-</span> o <span class="sc">*</span> p <span class="sc">*</span> (n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb149-35"><a href="type-2-3-gauge-rr-study.html#cb149-35" tabindex="-1"></a></span>
+<span id="cb149-36"><a href="type-2-3-gauge-rr-study.html#cb149-36" tabindex="-1"></a><span class="co"># mean squares</span></span>
+<span id="cb149-37"><a href="type-2-3-gauge-rr-study.html#cb149-37" tabindex="-1"></a>MS_O  <span class="ot">&lt;-</span> SS_O <span class="sc">/</span> df_O</span>
+<span id="cb149-38"><a href="type-2-3-gauge-rr-study.html#cb149-38" tabindex="-1"></a>MS_P  <span class="ot">&lt;-</span> SS_P <span class="sc">/</span> df_P</span>
+<span id="cb149-39"><a href="type-2-3-gauge-rr-study.html#cb149-39" tabindex="-1"></a>MS_OP <span class="ot">&lt;-</span> SS_OP <span class="sc">/</span> df_OP</span>
+<span id="cb149-40"><a href="type-2-3-gauge-rr-study.html#cb149-40" tabindex="-1"></a>MS_E  <span class="ot">&lt;-</span> SS_E <span class="sc">/</span> df_E</span>
+<span id="cb149-41"><a href="type-2-3-gauge-rr-study.html#cb149-41" tabindex="-1"></a></span>
+<span id="cb149-42"><a href="type-2-3-gauge-rr-study.html#cb149-42" tabindex="-1"></a><span class="co"># Variance component estimates assuming that both Operators and Parts are random effects</span></span>
+<span id="cb149-43"><a href="type-2-3-gauge-rr-study.html#cb149-43" tabindex="-1"></a>sigma2_E  <span class="ot">&lt;-</span> MS_E</span>
+<span id="cb149-44"><a href="type-2-3-gauge-rr-study.html#cb149-44" tabindex="-1"></a>sigma2_OP <span class="ot">&lt;-</span> (MS_OP <span class="sc">-</span> MS_E) <span class="sc">/</span> n</span>
+<span id="cb149-45"><a href="type-2-3-gauge-rr-study.html#cb149-45" tabindex="-1"></a>sigma2_O  <span class="ot">&lt;-</span> (MS_O <span class="sc">-</span> MS_OP) <span class="sc">/</span> (n <span class="sc">*</span> p)</span>
+<span id="cb149-46"><a href="type-2-3-gauge-rr-study.html#cb149-46" tabindex="-1"></a>sigma2_P  <span class="ot">&lt;-</span> (MS_P <span class="sc">-</span> MS_OP) <span class="sc">/</span> (n <span class="sc">*</span> o)</span>
+<span id="cb149-47"><a href="type-2-3-gauge-rr-study.html#cb149-47" tabindex="-1"></a></span>
+<span id="cb149-48"><a href="type-2-3-gauge-rr-study.html#cb149-48" tabindex="-1"></a>reprod <span class="ot">&lt;-</span> sigma2_O <span class="sc">+</span> sigma2_OP</span>
+<span id="cb149-49"><a href="type-2-3-gauge-rr-study.html#cb149-49" tabindex="-1"></a>repeatab <span class="ot">&lt;-</span> sigma2_E</span>
+<span id="cb149-50"><a href="type-2-3-gauge-rr-study.html#cb149-50" tabindex="-1"></a>gauge <span class="ot">&lt;-</span> reprod <span class="sc">+</span> repeatab</span>
+<span id="cb149-51"><a href="type-2-3-gauge-rr-study.html#cb149-51" tabindex="-1"></a>total <span class="ot">&lt;-</span> gauge <span class="sc">+</span> sigma2_P</span>
+<span id="cb149-52"><a href="type-2-3-gauge-rr-study.html#cb149-52" tabindex="-1"></a></span>
+<span id="cb149-53"><a href="type-2-3-gauge-rr-study.html#cb149-53" tabindex="-1"></a>varComp <span class="ot">&lt;-</span> <span class="fu">c</span>(gauge, repeatab, reprod, sigma2_O, sigma2_OP, sigma2_P, total)</span>
+<span id="cb149-54"><a href="type-2-3-gauge-rr-study.html#cb149-54" tabindex="-1"></a></span>
+<span id="cb149-55"><a href="type-2-3-gauge-rr-study.html#cb149-55" tabindex="-1"></a><span class="co"># %Contribution</span></span>
+<span id="cb149-56"><a href="type-2-3-gauge-rr-study.html#cb149-56" tabindex="-1"></a>percContrib <span class="ot">&lt;-</span> varComp <span class="sc">/</span> total <span class="sc">*</span> <span class="dv">100</span> </span>
+<span id="cb149-57"><a href="type-2-3-gauge-rr-study.html#cb149-57" tabindex="-1"></a></span>
+<span id="cb149-58"><a href="type-2-3-gauge-rr-study.html#cb149-58" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(varComp, percContrib), </span>
+<span id="cb149-59"><a href="type-2-3-gauge-rr-study.html#cb149-59" tabindex="-1"></a>              <span class="at">nrow =</span> <span class="dv">7</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb149-60"><a href="type-2-3-gauge-rr-study.html#cb149-60" tabindex="-1"></a></span>
+<span id="cb149-61"><a href="type-2-3-gauge-rr-study.html#cb149-61" tabindex="-1"></a><span class="fu">colnames</span>(res) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Variance Components&quot;</span>, <span class="st">&quot;% Contribution&quot;</span>)</span>
+<span id="cb149-62"><a href="type-2-3-gauge-rr-study.html#cb149-62" tabindex="-1"></a></span>
+<span id="cb149-63"><a href="type-2-3-gauge-rr-study.html#cb149-63" tabindex="-1"></a><span class="fu">rownames</span>(res) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Total Gage R&amp;R&quot;</span>, <span class="st">&quot;Repeatability&quot;</span>, <span class="st">&quot;Reproducibility&quot;</span>, <span class="st">&quot;Operator&quot;</span>, </span>
+<span id="cb149-64"><a href="type-2-3-gauge-rr-study.html#cb149-64" tabindex="-1"></a>                   <span class="st">&quot;Part:Operator&quot;</span>, <span class="st">&quot;Part-To-Part&quot;</span>, <span class="st">&quot;Total Variation&quot;</span>)</span>
+<span id="cb149-65"><a href="type-2-3-gauge-rr-study.html#cb149-65" tabindex="-1"></a></span>
+<span id="cb149-66"><a href="type-2-3-gauge-rr-study.html#cb149-66" tabindex="-1"></a>res</span></code></pre></div>
+<pre><code>##                 Variance Components % Contribution
+## Total Gage R&amp;R            1.8037037       3.600473
+## Repeatability             0.5111111       1.020257
+## Reproducibility           1.2925926       2.580216
+## Operator                  0.5646091       1.127047
+## Part:Operator             0.7279835       1.453168
+## Part-To-Part             48.2925926      96.399527
+## Total Variation          50.0962963     100.000000</code></pre>
+</div>
+<div id="jmpGRR" class="section level3 hasAnchor" number="10.1.4">
+<h3><span class="header-section-number">10.1.4</span> JMP<a href="type-2-3-gauge-rr-study.html#jmpGRR" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="figure"><span style="display:block;" id="fig:grrJMP"></span>
+<img src="Screenshots/Gauge%20R&R/grrJMP.png" alt="\label{fig:grrJMP}JMP Output for Type 2 Gauge r&amp;R Analysis"  />
+<p class="caption">
+Figure 10.2: JMP Output for Type 2 Gauge r&amp;R Analysis
+</p>
+</div>
+</div>
+<div id="minitabGRR" class="section level3 hasAnchor" number="10.1.5">
+<h3><span class="header-section-number">10.1.5</span> Minitab<a href="type-2-3-gauge-rr-study.html#minitabGRR" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="figure"><span style="display:block;" id="fig:grrMinitab1"></span>
+<img src="Screenshots/Gauge%20R&R/grrMinitabPart1.png" alt="\label{fig:grrMinitab1}Minitab Output for Type 2 Gauge r&amp;R Analysis (Part 1)"  />
+<p class="caption">
+Figure 10.3: Minitab Output for Type 2 Gauge r&amp;R Analysis (Part 1)
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:grrMinitab2"></span>
+<img src="Screenshots/Gauge%20R&R/grrMinitabPart2.png" alt="\label{fig:grrMinitab2}Minitab Output for Type 2 Gauge r&amp;R Analysis (Part 2)"  />
+<p class="caption">
+Figure 10.4: Minitab Output for Type 2 Gauge r&amp;R Analysis (Part 2)
+</p>
+</div>
+</div>
+<div id="rGRR" class="section level3 hasAnchor" number="10.1.6">
+<h3><span class="header-section-number">10.1.6</span> R<a href="type-2-3-gauge-rr-study.html#rGRR" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="type-2-3-gauge-rr-study.html#cb151-1" tabindex="-1"></a><span class="fu">library</span>(SixSigma)</span>
+<span id="cb151-2"><a href="type-2-3-gauge-rr-study.html#cb151-2" tabindex="-1"></a><span class="fu">ss.rr</span>(Measurement, Part, Operator, <span class="at">data =</span> dat, <span class="at">print_plot =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Complete model (with interaction):
+## 
+##               Df Sum Sq Mean Sq F value   Pr(&gt;F)
+## Part           9   3936   437.3 162.270 2.29e-15
+## Operator       2     39    19.6   7.285  0.00481
+## Part:Operator 18     49     2.7   5.273 5.06e-07
+## Repeatability 60     31     0.5                 
+## Total         89   4054                         
+## 
+## alpha for removing interaction: 0.05 
+## 
+## Gage R&amp;R
+## 
+##                      VarComp %Contrib
+## Total Gage R&amp;R     1.8037037     3.60
+##   Repeatability    0.5111111     1.02
+##   Reproducibility  1.2925926     2.58
+##     Operator       0.5646091     1.13
+## Part:Operator      0.7279835     1.45
+## Part-To-Part      48.2925926    96.40
+## Total Variation   50.0962963   100.00
+## 
+##                      StdDev  StudyVar %StudyVar
+## Total Gage R&amp;R    1.3430204  8.058122     18.97
+##   Repeatability   0.7149204  4.289522     10.10
+##   Reproducibility 1.1369224  6.821535     16.06
+##     Operator      0.7514047  4.508428     10.62
+## Part:Operator     0.8532195  5.119317     12.05
+## Part-To-Part      6.9492872 41.695723     98.18
+## Total Variation   7.0778737 42.467242    100.00
+## 
+## Number of Distinct Categories = 7</code></pre>
+</div>
+</div>
+<div id="GRRType3" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Type 3 Gauge r&amp;R Study<a href="type-2-3-gauge-rr-study.html#GRRType3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Consider an example from Gadim &amp; Doniavi (2018). The data concern the tensile strength of polymer yarns. Each of the <span class="math inline">\(30\)</span> yarns was measured <span class="math inline">\(3\)</span> times:</p>
 <table>
-<caption><span id="tab:unnamed-chunk-95">Table 6.6: </span>Result Overview Odds-ratio Logistic Regression</caption>
+<caption><span id="tab:unnamed-chunk-136">Table 10.4: </span>Type 3 Gauge R&amp;R Data from Gadim &amp; Doniavi (2018)</caption>
+<thead>
+<tr class="header">
+<th align="left">Part</th>
+<th align="right">Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">1.6245</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="right">1.6225</td>
+</tr>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">1.6278</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="right">1.7277</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="right">1.7254</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="right">1.7307</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">1.6847</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="right">1.6828</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">1.6874</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="right">1.8249</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="right">1.8226</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="right">1.8273</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">1.7114</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="right">1.7054</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">1.7160</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="right">1.8072</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="right">1.8006</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="right">1.8160</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="right">1.7681</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="right">1.7590</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="right">1.7677</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="right">1.8650</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="right">1.8561</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="right">1.8737</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="right">1.6670</td>
+</tr>
+<tr class="even">
+<td align="left">9</td>
+<td align="right">1.6579</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="right">1.6700</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="right">1.8546</td>
+</tr>
+<tr class="odd">
+<td align="left">10</td>
+<td align="right">1.8520</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="right">1.8583</td>
+</tr>
+<tr class="odd">
+<td align="left">11</td>
+<td align="right">1.7948</td>
+</tr>
+<tr class="even">
+<td align="left">11</td>
+<td align="right">1.7925</td>
+</tr>
+<tr class="odd">
+<td align="left">11</td>
+<td align="right">1.7976</td>
+</tr>
+<tr class="even">
+<td align="left">12</td>
+<td align="right">1.9814</td>
+</tr>
+<tr class="odd">
+<td align="left">12</td>
+<td align="right">1.9799</td>
+</tr>
+<tr class="even">
+<td align="left">12</td>
+<td align="right">1.9846</td>
+</tr>
+<tr class="odd">
+<td align="left">13</td>
+<td align="right">1.9046</td>
+</tr>
+<tr class="even">
+<td align="left">13</td>
+<td align="right">1.9022</td>
+</tr>
+<tr class="odd">
+<td align="left">13</td>
+<td align="right">1.9081</td>
+</tr>
+<tr class="even">
+<td align="left">14</td>
+<td align="right">2.0546</td>
+</tr>
+<tr class="odd">
+<td align="left">14</td>
+<td align="right">2.0520</td>
+</tr>
+<tr class="even">
+<td align="left">14</td>
+<td align="right">2.0583</td>
+</tr>
+<tr class="odd">
+<td align="left">15</td>
+<td align="right">1.9654</td>
+</tr>
+<tr class="even">
+<td align="left">15</td>
+<td align="right">1.9594</td>
+</tr>
+<tr class="odd">
+<td align="left">15</td>
+<td align="right">1.9700</td>
+</tr>
+<tr class="even">
+<td align="left">16</td>
+<td align="right">2.1570</td>
+</tr>
+<tr class="odd">
+<td align="left">16</td>
+<td align="right">2.1479</td>
+</tr>
+<tr class="even">
+<td align="left">16</td>
+<td align="right">2.1600</td>
+</tr>
+<tr class="odd">
+<td align="left">17</td>
+<td align="right">1.8684</td>
+</tr>
+<tr class="even">
+<td align="left">17</td>
+<td align="right">1.8624</td>
+</tr>
+<tr class="odd">
+<td align="left">17</td>
+<td align="right">1.8730</td>
+</tr>
+<tr class="even">
+<td align="left">18</td>
+<td align="right">2.0548</td>
+</tr>
+<tr class="odd">
+<td align="left">18</td>
+<td align="right">2.0526</td>
+</tr>
+<tr class="even">
+<td align="left">18</td>
+<td align="right">2.0575</td>
+</tr>
+<tr class="odd">
+<td align="left">19</td>
+<td align="right">1.8109</td>
+</tr>
+<tr class="even">
+<td align="left">19</td>
+<td align="right">1.8084</td>
+</tr>
+<tr class="odd">
+<td align="left">19</td>
+<td align="right">1.8135</td>
+</tr>
+<tr class="even">
+<td align="left">20</td>
+<td align="right">1.8896</td>
+</tr>
+<tr class="odd">
+<td align="left">20</td>
+<td align="right">1.8812</td>
+</tr>
+<tr class="even">
+<td align="left">20</td>
+<td align="right">1.8901</td>
+</tr>
+<tr class="odd">
+<td align="left">21</td>
+<td align="right">1.8840</td>
+</tr>
+<tr class="even">
+<td align="left">21</td>
+<td align="right">1.8749</td>
+</tr>
+<tr class="odd">
+<td align="left">21</td>
+<td align="right">1.8870</td>
+</tr>
+<tr class="even">
+<td align="left">22</td>
+<td align="right">1.9694</td>
+</tr>
+<tr class="odd">
+<td align="left">22</td>
+<td align="right">1.9634</td>
+</tr>
+<tr class="even">
+<td align="left">22</td>
+<td align="right">1.9740</td>
+</tr>
+<tr class="odd">
+<td align="left">23</td>
+<td align="right">1.7645</td>
+</tr>
+<tr class="even">
+<td align="left">23</td>
+<td align="right">1.7629</td>
+</tr>
+<tr class="odd">
+<td align="left">23</td>
+<td align="right">1.7675</td>
+</tr>
+<tr class="even">
+<td align="left">24</td>
+<td align="right">1.9130</td>
+</tr>
+<tr class="odd">
+<td align="left">24</td>
+<td align="right">1.9039</td>
+</tr>
+<tr class="even">
+<td align="left">24</td>
+<td align="right">1.9159</td>
+</tr>
+<tr class="odd">
+<td align="left">25</td>
+<td align="right">1.9415</td>
+</tr>
+<tr class="even">
+<td align="left">25</td>
+<td align="right">1.9434</td>
+</tr>
+<tr class="odd">
+<td align="left">25</td>
+<td align="right">1.9500</td>
+</tr>
+<tr class="even">
+<td align="left">26</td>
+<td align="right">1.8774</td>
+</tr>
+<tr class="odd">
+<td align="left">26</td>
+<td align="right">1.8714</td>
+</tr>
+<tr class="even">
+<td align="left">26</td>
+<td align="right">1.8820</td>
+</tr>
+<tr class="odd">
+<td align="left">27</td>
+<td align="right">1.8737</td>
+</tr>
+<tr class="even">
+<td align="left">27</td>
+<td align="right">1.8713</td>
+</tr>
+<tr class="odd">
+<td align="left">27</td>
+<td align="right">1.8769</td>
+</tr>
+<tr class="even">
+<td align="left">28</td>
+<td align="right">1.9076</td>
+</tr>
+<tr class="odd">
+<td align="left">28</td>
+<td align="right">1.8992</td>
+</tr>
+<tr class="even">
+<td align="left">28</td>
+<td align="right">1.9081</td>
+</tr>
+<tr class="odd">
+<td align="left">29</td>
+<td align="right">1.9550</td>
+</tr>
+<tr class="even">
+<td align="left">29</td>
+<td align="right">1.9461</td>
+</tr>
+<tr class="odd">
+<td align="left">29</td>
+<td align="right">1.9637</td>
+</tr>
+<tr class="even">
+<td align="left">30</td>
+<td align="right">1.9046</td>
+</tr>
+<tr class="odd">
+<td align="left">30</td>
+<td align="right">1.9022</td>
+</tr>
+<tr class="even">
+<td align="left">30</td>
+<td align="right">1.9081</td>
+</tr>
+</tbody>
+</table>
+<div id="ResultsGRRType3" class="section level3 hasAnchor" number="10.2.1">
+<h3><span class="header-section-number">10.2.1</span> Results Overview<a href="type-2-3-gauge-rr-study.html#ResultsGRRType3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="variance-components-1" class="section level4 hasAnchor" number="10.2.1.1">
+<h4><span class="header-section-number">10.2.1.1</span> Variance Components<a href="type-2-3-gauge-rr-study.html#variance-components-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<table>
+<caption><span id="tab:unnamed-chunk-137">Table 10.5: </span>Results Overview Variance Components</caption>
 <thead>
 <tr class="header">
 <th align="left"></th>
 <th align="right">JASP</th>
-<th align="right">SPSS</th>
-<th align="right">SAS</th>
+<th align="right">By Hand</th>
+<th align="right">JMP</th>
 <th align="right">Minitab</th>
 <th align="right">R</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Constant</td>
-<td align="right">42.9339</td>
-<td align="right">42.934</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">42.9339</td>
+<td align="left">Total Gage R&amp;R</td>
+<td align="right">2.37e-05</td>
+<td align="right">2.37e-05</td>
+<td align="right">0.00002</td>
+<td align="right">2.37e-05</td>
+<td align="right">2.37e-05</td>
 </tr>
 <tr class="even">
-<td align="left">Age</td>
-<td align="right">0.9616</td>
-<td align="right">0.962</td>
-<td align="right">0.962</td>
-<td align="right">0.9616</td>
-<td align="right">0.9616</td>
+<td align="left">Repeatability</td>
+<td align="right">2.37e-05</td>
+<td align="right">2.37e-05</td>
+<td align="right">0.00002</td>
+<td align="right">2.37e-05</td>
+<td align="right">2.37e-05</td>
 </tr>
 <tr class="odd">
-<td align="left">2nd Class</td>
-<td align="right">0.2747</td>
-<td align="right">0.275</td>
-<td align="right">0.275</td>
-<td align="right">0.2747</td>
-<td align="right">0.2747</td>
+<td align="left">Part-To-Part</td>
+<td align="right">1.40e-02</td>
+<td align="right">1.40e-02</td>
+<td align="right">0.01400</td>
+<td align="right">1.40e-02</td>
+<td align="right">1.40e-02</td>
 </tr>
 <tr class="even">
-<td align="left">3rd Class</td>
-<td align="right">0.0803</td>
-<td align="right">0.080</td>
-<td align="right">0.080</td>
-<td align="right">0.0803</td>
-<td align="right">0.0803</td>
-</tr>
-<tr class="odd">
-<td align="left">Sex(Male)</td>
-<td align="right">0.0720</td>
-<td align="right">0.072</td>
-<td align="right">0.072</td>
-<td align="right">0.0720</td>
-<td align="right">0.0720</td>
+<td align="left">Total Variation</td>
+<td align="right">1.40e-02</td>
+<td align="right">1.40e-02</td>
+<td align="right">0.01400</td>
+<td align="right">1.40e-02</td>
+<td align="right">1.40e-02</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Note</strong>: The reference case to which the odds ratios are refering is a female passenger in the first class with age 0.</p>
 </div>
-<div id="jaspLogreg" class="section level3 hasAnchor" number="6.3.2">
-<h3><span class="header-section-number">6.3.2</span> JASP<a href="regression.html#jaspLogreg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="figure"><span style="display:block;" id="fig:LogRegJASP"></span>
-<img src="Screenshots/Logistic%20Regression/logregJASP.PNG" alt="\label{fig:LogRegJASP}JASP Output for Logistic Regression"  />
+<div id="contribution-1" class="section level4 hasAnchor" number="10.2.1.2">
+<h4><span class="header-section-number">10.2.1.2</span> % Contribution<a href="type-2-3-gauge-rr-study.html#contribution-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<table>
+<caption><span id="tab:unnamed-chunk-138">Table 10.6: </span>Results Overview % Contribution</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">JASP</th>
+<th align="right">By Hand</th>
+<th align="right">JMP</th>
+<th align="right">Minitab</th>
+<th align="right">R</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Total Gage R&amp;R</td>
+<td align="right">0.16</td>
+<td align="right">0.16</td>
+<td align="right">0.16</td>
+<td align="right">0.16</td>
+<td align="right">0.16</td>
+</tr>
+<tr class="even">
+<td align="left">Repeatability</td>
+<td align="right">0.16</td>
+<td align="right">0.16</td>
+<td align="right">0.16</td>
+<td align="right">0.16</td>
+<td align="right">0.16</td>
+</tr>
+<tr class="odd">
+<td align="left">Part-To-Part</td>
+<td align="right">99.84</td>
+<td align="right">99.84</td>
+<td align="right">99.84</td>
+<td align="right">99.84</td>
+<td align="right">99.84</td>
+</tr>
+<tr class="even">
+<td align="left">Total Variation</td>
+<td align="right">100.00</td>
+<td align="right">100.00</td>
+<td align="right">100.00</td>
+<td align="right">100.00</td>
+<td align="right">100.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="jaspGRRType3" class="section level3 hasAnchor" number="10.2.2">
+<h3><span class="header-section-number">10.2.2</span> JASP<a href="type-2-3-gauge-rr-study.html#jaspGRRType3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="figure"><span style="display:block;" id="fig:grrType3JASP"></span>
+<img src="Screenshots/Gauge%20R&R/grrType3JASP.png" alt="\label{fig:grrType3JASP}JASP Output for Type 3 Gauge r&amp;R Analysis"  />
 <p class="caption">
-Figure 6.13: JASP Output for Logistic Regression
+Figure 10.5: JASP Output for Type 3 Gauge r&amp;R Analysis
 </p>
 </div>
 </div>
-<div id="spssLogreg" class="section level3 hasAnchor" number="6.3.3">
-<h3><span class="header-section-number">6.3.3</span> SPSS<a href="regression.html#spssLogreg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="regression.html#cb100-1" tabindex="-1"></a>DATASET ACTIVATE DataSet1.</span>
-<span id="cb100-2"><a href="regression.html#cb100-2" tabindex="-1"></a>LOGISTIC REGRESSION VARIABLES Survived</span>
-<span id="cb100-3"><a href="regression.html#cb100-3" tabindex="-1"></a>  <span class="sc">/</span>METHOD<span class="ot">=</span>ENTER PClass Age Sex </span>
-<span id="cb100-4"><a href="regression.html#cb100-4" tabindex="-1"></a>  <span class="sc">/</span><span class="fu">CONTRAST</span> (PClass)<span class="ot">=</span><span class="fu">Indicator</span>(<span class="dv">1</span>)</span>
-<span id="cb100-5"><a href="regression.html#cb100-5" tabindex="-1"></a>  <span class="sc">/</span><span class="fu">CONTRAST</span> (Sex)<span class="ot">=</span><span class="fu">Indicator</span>(<span class="dv">1</span>)</span>
-<span id="cb100-6"><a href="regression.html#cb100-6" tabindex="-1"></a>  <span class="sc">/</span>CRITERIA<span class="ot">=</span><span class="fu">PIN</span>(.<span class="dv">05</span>) <span class="fu">POUT</span>(.<span class="dv">10</span>) <span class="fu">ITERATE</span>(<span class="dv">20</span>) <span class="fu">CUT</span>(.<span class="dv">5</span>).</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:LogRegSPSS"></span>
-<img src="Screenshots/Logistic%20Regression/logregSPSS.PNG" alt="\label{fig:LogRegSPSS}SPSS Output for Logistic Regression"  />
+<div id="byHandGRRType3" class="section level3 hasAnchor" number="10.2.3">
+<h3><span class="header-section-number">10.2.3</span> By Hand<a href="type-2-3-gauge-rr-study.html#byHandGRRType3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="type-2-3-gauge-rr-study.html#cb153-1" tabindex="-1"></a><span class="co"># number of levels</span></span>
+<span id="cb153-2"><a href="type-2-3-gauge-rr-study.html#cb153-2" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">nlevels</span>(datType3<span class="sc">$</span>Part)</span>
+<span id="cb153-3"><a href="type-2-3-gauge-rr-study.html#cb153-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(datType3<span class="sc">$</span>Measurement)</span>
+<span id="cb153-4"><a href="type-2-3-gauge-rr-study.html#cb153-4" tabindex="-1"></a>r <span class="ot">&lt;-</span>  n <span class="sc">/</span> p</span>
+<span id="cb153-5"><a href="type-2-3-gauge-rr-study.html#cb153-5" tabindex="-1"></a></span>
+<span id="cb153-6"><a href="type-2-3-gauge-rr-study.html#cb153-6" tabindex="-1"></a><span class="co"># totals</span></span>
+<span id="cb153-7"><a href="type-2-3-gauge-rr-study.html#cb153-7" tabindex="-1"></a>grand_total <span class="ot">&lt;-</span> <span class="fu">sum</span>(datType3<span class="sc">$</span>Measurement)</span>
+<span id="cb153-8"><a href="type-2-3-gauge-rr-study.html#cb153-8" tabindex="-1"></a></span>
+<span id="cb153-9"><a href="type-2-3-gauge-rr-study.html#cb153-9" tabindex="-1"></a><span class="co"># SS total</span></span>
+<span id="cb153-10"><a href="type-2-3-gauge-rr-study.html#cb153-10" tabindex="-1"></a>SS_total <span class="ot">&lt;-</span> <span class="fu">sum</span>((datType3<span class="sc">$</span>Measurement <span class="sc">-</span> <span class="fu">mean</span>(datType3<span class="sc">$</span>Measurement))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb153-11"><a href="type-2-3-gauge-rr-study.html#cb153-11" tabindex="-1"></a></span>
+<span id="cb153-12"><a href="type-2-3-gauge-rr-study.html#cb153-12" tabindex="-1"></a><span class="co"># SS part</span></span>
+<span id="cb153-13"><a href="type-2-3-gauge-rr-study.html#cb153-13" tabindex="-1"></a>partMeans <span class="ot">&lt;-</span> <span class="fu">tapply</span>(datType3<span class="sc">$</span>Measurement, datType3<span class="sc">$</span>Part, mean)</span>
+<span id="cb153-14"><a href="type-2-3-gauge-rr-study.html#cb153-14" tabindex="-1"></a>SS_P <span class="ot">&lt;-</span> <span class="fu">sum</span>((partMeans <span class="sc">-</span> <span class="fu">mean</span>(datType3<span class="sc">$</span>Measurement))<span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span> r</span>
+<span id="cb153-15"><a href="type-2-3-gauge-rr-study.html#cb153-15" tabindex="-1"></a></span>
+<span id="cb153-16"><a href="type-2-3-gauge-rr-study.html#cb153-16" tabindex="-1"></a><span class="co"># SS error</span></span>
+<span id="cb153-17"><a href="type-2-3-gauge-rr-study.html#cb153-17" tabindex="-1"></a>deviations <span class="ot">&lt;-</span> datType3<span class="sc">$</span>Measurement <span class="sc">-</span> <span class="fu">rep</span>(partMeans, <span class="at">each =</span> r)</span>
+<span id="cb153-18"><a href="type-2-3-gauge-rr-study.html#cb153-18" tabindex="-1"></a>SS_E <span class="ot">&lt;-</span> <span class="fu">sum</span>(deviations<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb153-19"><a href="type-2-3-gauge-rr-study.html#cb153-19" tabindex="-1"></a></span>
+<span id="cb153-20"><a href="type-2-3-gauge-rr-study.html#cb153-20" tabindex="-1"></a><span class="co"># degrees of freedom</span></span>
+<span id="cb153-21"><a href="type-2-3-gauge-rr-study.html#cb153-21" tabindex="-1"></a>df_P <span class="ot">&lt;-</span> p <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb153-22"><a href="type-2-3-gauge-rr-study.html#cb153-22" tabindex="-1"></a>df_E <span class="ot">&lt;-</span> n <span class="sc">-</span> p</span>
+<span id="cb153-23"><a href="type-2-3-gauge-rr-study.html#cb153-23" tabindex="-1"></a></span>
+<span id="cb153-24"><a href="type-2-3-gauge-rr-study.html#cb153-24" tabindex="-1"></a><span class="co"># mean squares</span></span>
+<span id="cb153-25"><a href="type-2-3-gauge-rr-study.html#cb153-25" tabindex="-1"></a>MS_P  <span class="ot">&lt;-</span> SS_P <span class="sc">/</span> df_P</span>
+<span id="cb153-26"><a href="type-2-3-gauge-rr-study.html#cb153-26" tabindex="-1"></a>MS_E  <span class="ot">&lt;-</span> SS_E <span class="sc">/</span> df_E</span>
+<span id="cb153-27"><a href="type-2-3-gauge-rr-study.html#cb153-27" tabindex="-1"></a></span>
+<span id="cb153-28"><a href="type-2-3-gauge-rr-study.html#cb153-28" tabindex="-1"></a><span class="co"># Variance components</span></span>
+<span id="cb153-29"><a href="type-2-3-gauge-rr-study.html#cb153-29" tabindex="-1"></a>sigma2_E <span class="ot">&lt;-</span> MS_E</span>
+<span id="cb153-30"><a href="type-2-3-gauge-rr-study.html#cb153-30" tabindex="-1"></a>sigma2_P <span class="ot">&lt;-</span> (MS_P <span class="sc">-</span> MS_E) <span class="sc">/</span> r</span>
+<span id="cb153-31"><a href="type-2-3-gauge-rr-study.html#cb153-31" tabindex="-1"></a></span>
+<span id="cb153-32"><a href="type-2-3-gauge-rr-study.html#cb153-32" tabindex="-1"></a>repeatab <span class="ot">&lt;-</span> sigma2_E</span>
+<span id="cb153-33"><a href="type-2-3-gauge-rr-study.html#cb153-33" tabindex="-1"></a>gauge <span class="ot">&lt;-</span> repeatab</span>
+<span id="cb153-34"><a href="type-2-3-gauge-rr-study.html#cb153-34" tabindex="-1"></a>total <span class="ot">&lt;-</span> gauge <span class="sc">+</span> sigma2_P</span>
+<span id="cb153-35"><a href="type-2-3-gauge-rr-study.html#cb153-35" tabindex="-1"></a></span>
+<span id="cb153-36"><a href="type-2-3-gauge-rr-study.html#cb153-36" tabindex="-1"></a>varComp <span class="ot">&lt;-</span> <span class="fu">c</span>(gauge, repeatab, sigma2_P, total)</span>
+<span id="cb153-37"><a href="type-2-3-gauge-rr-study.html#cb153-37" tabindex="-1"></a></span>
+<span id="cb153-38"><a href="type-2-3-gauge-rr-study.html#cb153-38" tabindex="-1"></a><span class="co"># %Contribution</span></span>
+<span id="cb153-39"><a href="type-2-3-gauge-rr-study.html#cb153-39" tabindex="-1"></a>percContrib <span class="ot">&lt;-</span> varComp <span class="sc">/</span> total <span class="sc">*</span> <span class="dv">100</span> </span>
+<span id="cb153-40"><a href="type-2-3-gauge-rr-study.html#cb153-40" tabindex="-1"></a></span>
+<span id="cb153-41"><a href="type-2-3-gauge-rr-study.html#cb153-41" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(varComp, percContrib), </span>
+<span id="cb153-42"><a href="type-2-3-gauge-rr-study.html#cb153-42" tabindex="-1"></a>              <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb153-43"><a href="type-2-3-gauge-rr-study.html#cb153-43" tabindex="-1"></a></span>
+<span id="cb153-44"><a href="type-2-3-gauge-rr-study.html#cb153-44" tabindex="-1"></a><span class="fu">colnames</span>(res) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Variance Components&quot;</span>, <span class="st">&quot;% Contribution&quot;</span>)</span>
+<span id="cb153-45"><a href="type-2-3-gauge-rr-study.html#cb153-45" tabindex="-1"></a></span>
+<span id="cb153-46"><a href="type-2-3-gauge-rr-study.html#cb153-46" tabindex="-1"></a><span class="fu">rownames</span>(res) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Total Gage R&amp;R&quot;</span>, <span class="st">&quot;Repeatability&quot;</span>, <span class="st">&quot;Part-To-Part&quot;</span>, <span class="st">&quot;Total Variation&quot;</span>)</span>
+<span id="cb153-47"><a href="type-2-3-gauge-rr-study.html#cb153-47" tabindex="-1"></a></span>
+<span id="cb153-48"><a href="type-2-3-gauge-rr-study.html#cb153-48" tabindex="-1"></a>res</span></code></pre></div>
+<pre><code>##                 Variance Components % Contribution
+## Total Gage R&amp;R          0.000023714      0.1641736
+## Repeatability           0.000023714      0.1641736
+## Part-To-Part            0.014420756     99.8358264
+## Total Variation         0.014444470    100.0000000</code></pre>
+</div>
+<div id="jmpGRRType3" class="section level3 hasAnchor" number="10.2.4">
+<h3><span class="header-section-number">10.2.4</span> JMP<a href="type-2-3-gauge-rr-study.html#jmpGRRType3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="figure"><span style="display:block;" id="fig:grrType3JMP"></span>
+<img src="Screenshots/Gauge%20R&R/grrType3JMP.png" alt="\label{fig:grrType3JMP}JMP Output for Type 3 Gauge r&amp;R Analysis"  />
 <p class="caption">
-Figure 6.14: SPSS Output for Logistic Regression
+Figure 10.6: JMP Output for Type 3 Gauge r&amp;R Analysis
 </p>
 </div>
 </div>
-<div id="sasLogreg" class="section level3 hasAnchor" number="6.3.4">
-<h3><span class="header-section-number">6.3.4</span> SAS<a href="regression.html#sasLogreg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="regression.html#cb101-1" tabindex="-1"></a>proc logistic data<span class="ot">=</span>work.LogReg DESC;</span>
-<span id="cb101-2"><a href="regression.html#cb101-2" tabindex="-1"></a>  class PClass Sex <span class="sc">/</span> param<span class="ot">=</span>reference ref<span class="ot">=</span>first;</span>
-<span id="cb101-3"><a href="regression.html#cb101-3" tabindex="-1"></a>  model Survived <span class="ot">=</span> Age Sex PClass; </span>
-<span id="cb101-4"><a href="regression.html#cb101-4" tabindex="-1"></a>run;</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:LogRegSAS"></span>
-<img src="Screenshots/Logistic%20Regression/logregSas.PNG" alt="\label{fig:LogRegSAS}SAS Output for Logistic Regression"  />
+<div id="minitabGRR" class="section level3 hasAnchor" number="10.2.5">
+<h3><span class="header-section-number">10.2.5</span> Minitab<a href="type-2-3-gauge-rr-study.html#minitabGRR" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="figure"><span style="display:block;" id="fig:grrType3Minitab1"></span>
+<img src="Screenshots/Gauge%20R&R/grrType3MinitabPart1.png" alt="\label{fig:grrType3Minitab1}Minitab Output for Type 3 Gauge r&amp;R Analysis (Part 1)"  />
 <p class="caption">
-Figure 6.15: SAS Output for Logistic Regression
+Figure 10.7: Minitab Output for Type 3 Gauge r&amp;R Analysis (Part 1)
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:grrType3Minitab2"></span>
+<img src="Screenshots/Gauge%20R&R/grrType3MinitabPart2.png" alt="\label{fig:grrType3Minitab2}Minitab Output for Type 3 Gauge r&amp;R Analysis (Part 2)"  />
+<p class="caption">
+Figure 10.8: Minitab Output for Type 3 Gauge r&amp;R Analysis (Part 2)
 </p>
 </div>
 </div>
-<div id="minitabLogreg" class="section level3 hasAnchor" number="6.3.5">
-<h3><span class="header-section-number">6.3.5</span> Minitab<a href="regression.html#minitabLogreg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="figure"><span style="display:block;" id="fig:LogRegMinitab"></span>
-<img src="Screenshots/Logistic%20Regression/logregMinitab.PNG" alt="\label{fig:LogRegMinitab}Minitab Output for Logistic Regression"  />
-<p class="caption">
-Figure 6.16: Minitab Output for Logistic Regression
-</p>
+<div id="rGRRType3" class="section level3 hasAnchor" number="10.2.6">
+<h3><span class="header-section-number">10.2.6</span> R<a href="type-2-3-gauge-rr-study.html#rGRRType3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="type-2-3-gauge-rr-study.html#cb155-1" tabindex="-1"></a>datType3<span class="sc">$</span>Operator <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(dat)) <span class="co"># as input for ss.rr() function</span></span>
+<span id="cb155-2"><a href="type-2-3-gauge-rr-study.html#cb155-2" tabindex="-1"></a><span class="fu">ss.rr</span>(Measurement, Part, Operator, <span class="at">data =</span> datType3, <span class="at">print_plot =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## One-way ANOVA (single appraiser):
+## 
+##               Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Part          29 1.2553 0.04329    1825 &lt;2e-16
+## Repeatability 60 0.0014 0.00002               
+## Total         89 1.2567                       
+## 
+## Gage R&amp;R
+## 
+##                     VarComp %Contrib
+## Total Gage R&amp;R  0.000023714     0.16
+##   Repeatability 0.000023714     0.16
+## Part-To-Part    0.014420756    99.84
+## Total Variation 0.014444470   100.00
+## 
+##                      StdDev   StudyVar %StudyVar
+## Total Gage R&amp;R  0.004869702 0.02921821      4.05
+##   Repeatability 0.004869702 0.02921821      4.05
+## Part-To-Part    0.120086453 0.72051872     99.92
+## Total Variation 0.120185150 0.72111090    100.00
+## 
+## Number of Distinct Categories = 34</code></pre>
 </div>
+<div id="remarksGRR" class="section level3 hasAnchor" number="10.2.7">
+<h3><span class="header-section-number">10.2.7</span> Remarks<a href="type-2-3-gauge-rr-study.html#remarksGRR" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Variance components have been estimated using expected mean squares based on ANOVA in every software.</p>
 </div>
-<div id="rLogreg" class="section level3 hasAnchor" number="6.3.6">
-<h3><span class="header-section-number">6.3.6</span> R<a href="regression.html#rLogreg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="regression.html#cb102-1" tabindex="-1"></a>LogRegExample <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">factor</span>(Survived) <span class="sc">~</span>Age <span class="sc">+</span> <span class="fu">factor</span>(PClass) <span class="sc">+</span> <span class="fu">factor</span>(Sex), <span class="at">data=</span>LogReg.data2, <span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb102-2"><a href="regression.html#cb102-2" tabindex="-1"></a><span class="fu">summary</span>(LogRegExample)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## glm(formula = factor(Survived) ~ Age + factor(PClass) + factor(Sex), 
-##     family = binomial(link = &quot;logit&quot;), data = LogReg.data2)
-## 
-## Coefficients:
-##                  Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)      1.172856   0.253988   4.618 3.88e-06 ***
-## Age             -0.039177   0.007616  -5.144 2.69e-07 ***
-## factor(PClass)1  1.271127   0.160563   7.917 2.44e-15 ***
-## factor(PClass)2 -0.020835   0.138004  -0.151     0.88    
-## factor(Sex)1     1.315678   0.100753  13.058  &lt; 2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for binomial family taken to be 1)
-## 
-##     Null deviance: 1025.57  on 755  degrees of freedom
-## Residual deviance:  695.14  on 751  degrees of freedom
-##   (557 observations deleted due to missingness)
-## AIC: 705.14
-## 
-## Number of Fisher Scoring iterations: 5</code></pre>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="regression.html#cb104-1" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(LogRegExample))</span></code></pre></div>
-<pre><code>##     (Intercept)             Age factor(PClass)1 factor(PClass)2    factor(Sex)1 
-##       3.2312094       0.9615807       3.5648686       0.9793803       3.7272788</code></pre>
-</div>
-<div id="remarksLogreg" class="section level3 hasAnchor" number="6.3.7">
-<h3><span class="header-section-number">6.3.7</span> Remarks<a href="regression.html#remarksLogreg" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>All differences in results between the software are due to rounding.</p>
+<div id="refGRR" class="section level3 hasAnchor" number="10.2.8">
+<h3><span class="header-section-number">10.2.8</span> References<a href="type-2-3-gauge-rr-study.html#refGRR" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Gadim, H. G., &amp; Doniavi, A. (2018). Improving structural properties of polymer fibers to design and construct fiber spinneret and optimize process parameters using response surface method and gage R&amp;R. <em>Journal of Mechanical Science and Technology, 32</em>(3), 1135–1142. <a href="https://doi.org/10.1007/s12206-018-0216-7" class="uri">https://doi.org/10.1007/s12206-018-0216-7</a></p>
+<p>Houf, R. E., &amp; Berman, D. B. (1988). Statistical analysis of power module thermal test equipment performance. <em>IEEE Transactions on Components, Hybrids, and Manufacturing Technology, 11</em>(4), 516–520. <a href="https://doi.org/10.1109/33.16692" class="uri">https://doi.org/10.1109/33.16692</a></p>
 
 </div>
 </div>
@@ -1768,8 +1855,8 @@ Figure 6.16: Minitab Output for Logistic Regression
           </div>
         </div>
       </div>
-<a href="mixed-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="frequencies.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="reliability-module.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
