@@ -1,5 +1,5 @@
 --- 
-title: "JASP Verificiation Project"
+title: "JASP Verification Project"
 author: "info@jasp-stats.org"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
